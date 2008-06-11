@@ -1,3 +1,4 @@
+
 /*
  * Written by Sebastien Tricaud (c) 2008
  * Part of the PicViz project
@@ -31,6 +32,7 @@ static char *escape_str(char *str)
 
 
 %}
+%option noyywrap
 
 SECTION		(header|engine|axes|data)
 OPEN_SECTION    \{

@@ -1,5 +1,4 @@
-LINK_DIRECTORIES(${picviz_SOURCE_DIR}/src/libpicviz/)
-LINK_LIBRARIES(picviz)
 include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include)
-add_executable(mybin picviz.c)
-target_link_libraries(mybin picviz)
+link_directories(${picviz_SOURCE_DIR}/src/libpicviz/)
+add_executable(pcv picviz.c)
+target_link_libraries(pcv picviz)

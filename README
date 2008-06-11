@@ -2,3 +2,11 @@ PicViz - Parallel Coordinates Graph Generator
 =============================================
 (c) Copyright 2008 Sebastien Tricaud
 
+Install
+=======
+make install
+
+Use
+===
+picviz file.pcv
+
