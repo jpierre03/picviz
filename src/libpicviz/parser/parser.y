@@ -203,7 +203,8 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
                         }
 
                         axisplot = picviz_axisplot_new();
-                        axisplot->strval = strdup($3);
+                        //axisplot->strval = strdup($3);
+                        axisplot->strval = $3;
                         /* We first dump data into the structure, we render latter */
                         //axisplot->y = picviz_line_value_get_from_string($3);
                         axisplot->axis_id = axis_position + 1;
@@ -215,6 +216,9 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
 #endif
                         //printf("ma=%d, position=%d\n",max_axes, axis_position);
                         axis_position++;
+                        // TODO: Fix and understand what's going on htiw $3 here
+                        //free($3);
+                        //free($1);
                 }
 #ifdef DEBUGSR
         printf("<== dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING\n");

@@ -16,19 +16,56 @@ extern int axis_position;
 
 static char *escape_str(char *str)
 {
-	int i = -1;
+        size_t w = 0, i = 0;
+        int escape_next = 0;
+
+        for ( i = 0; str[i]; i++ ) {
+
+                if ( ! escape_next && str[i] == '\\' ) {
+                        escape_next = 1;
+                        continue;
+                }
+
+                str[w++] = str[i];
+                escape_next = 0;
+        }
+
+        str[w] = 0;
+        return str;
+}
+
+
+#if 0
+static char *escape_str(char *str)
+{
+	int i = 0;
 	size_t strsize;
 	char *ret;
 
-	if (!(strsize = strlen(str))) return strdup("");
-	ret = malloc(strsize - 2);
 
-	while (*str) ret[i++] = *str++;
+        strsize = strlen(str);
+
+	if (strsize < 2) return strdup("");
+	ret = malloc(strsize - 1);
+        if ( ! ret ) {
+                printf("Cannot allocate string\n");
+                return strdup("");
+        }
+
+        printf("str=[%s]\n", str);
+
+	while (*str) {
+                printf("i=%d\n", i);
+                ret[i] = *str++;
+                i++;
+        }
 
         ret[i-1] = '\0';
 
 	return ret;
 }
+#endif
+
 
 
 %}
