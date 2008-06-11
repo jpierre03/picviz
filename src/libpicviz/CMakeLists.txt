@@ -7,6 +7,6 @@ FLEX_TARGET(picviz ${picviz_SOURCE_DIR}/src/libpicviz/parser/lexer.l ${picviz_SO
 
 add_library(picviz SHARED axis.c image.c line.c plugins.c engine.c render.c values-mapping.c variable.c utils.c parser/parser.c parser/lexer.c props/color.c)
 
-target_link_libraries(picviz "-lm -lfl -ly")
+target_link_libraries(picviz "-lm")
 
 install(TARGETS picviz LIBRARY DESTINATION lib)
