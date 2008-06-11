@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+#
+# For python folks: show me the equivalent code for this
+#
+
+print "header {\n";
+print "    title = \"Syslog picviz analysis\";\n";
+print "}\n";
+
+print "axes {\n";
+print "    timeline t;\n"; # Time
+print "    string   ipsource;\n"; # IP Source
+print "    string   request;\n"; # Request type
+print "    string   log;\n"; # SRC
+print "}\n";
+
+print "data {\n";
+
+while ($line = <>) {
+
+        $line =~ s/\"/\\"/g; # We escape our quotes
+
+
+        $line =~ m/(\d+.\d+.\d+.\d+) \-.*\- \[\d+\/\w+\/\d+:(\d+:\d+):\d+.*\] \\\"(\w+)(.*)/;
+
+        if ($1=="") {
+        } else {
+                print "    t=\"$2\",ipsource=\"$1\",request=\"$3\",log=\"$4\";\n";
+        }
+}
+
+print "}\n";
+

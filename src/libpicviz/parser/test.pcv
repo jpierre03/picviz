@@ -1,0 +1,13 @@
+header {
+    title = "Syslog picviz analysis";
+}
+axes {
+    timeline t [label="timeline"];
+    short   i;
+    string   a;
+}
+data {
+   t="14:42", i="123", s="foobar" [color="red"];
+   t="15:45", i="200", s="abcdse";
+}
+

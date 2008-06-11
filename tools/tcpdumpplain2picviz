@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+#
+# For python folks: show me the equivalent code for this
+#
+
+print "header {\n";
+print "    title = \"Syslog picviz analysis\";\n";
+print "}\n";
+
+print "axes {\n";
+print "    timeline t [label=\"timestamp\"];\n"; # Time
+print "    ipv4   src [label=\"source\"];\n"; # Source IP
+print "    integer  sport [label=\"sport\"];\n"; # Source Port
+print "    ipv4   dst [label=\"destination\"];\n"; # Dest IP
+print "    integer  dport [label=\"dport\"];\n"; # Dest Port
+print "    string   log;\n"; # Rest of the log
+print "}\n";
+
+print "data {\n";
+
+while ($line = <>) {
+
+        $line =~ s/\"/\\"/g; # We escape our quotes
+        # 14:37:54.370751 IP 192.168.33.151.56776 > 156.56.103.5.80: . ack 836945 win 11856 <nop,nop,timestamp 4340406 321558533>
+        $line =~ m/(\d+:\d+):\d+.\d+ IP (\d+.\d+.\d+.\d+).(\d+) > (\d+.\d+.\d+.\d+).(\d+):(.*)/;
+
+        if ($1=="") {
+        } else {
+                if ($5>1024) {
+                        print "    t=\"$1\",src=\"$2\",sport=\"$3\",dst=\"$4\",dport=\"$5\",log=\"$6\" [color=\"blue\"];\n";
+                } else {
+                        print "    t=\"$1\",src=\"$2\",sport=\"$3\",dst=\"$4\",dport=\"$5\",log=\"$6\" [color=\"red\"];\n";
+                }
+        }
+        #}
+}
+
+print "}\n";
+

@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+#
+# For python folks: show me the equivalent code for this
+#
+
+print "header {\n";
+print "    title = \"Syslog picviz analysis\";\n";
+print "}\n";
+
+print "axes {\n";
+print "    timeline t;\n"; # Time
+print "    string   m;\n"; # Machine
+print "    string   src;\n"; # SRC
+print "    string   dst;\n"; # DST
+print "    integer  len;\n"; # LEN
+print "    integer  ttl;\n"; # TTL
+print "    integer  spt;\n"; # SPT
+print "    integer  dpt;\n"; # DPT
+print "}\n";
+
+print "data {\n";
+
+while ($line = <>) {
+
+        $line =~ s/\"/\\"/g; # We escape our quotes
+        # Mar 31 23:44:10 bridge kernel: INBOUND TCP: IN=br0 PHYSIN=eth0 OUT=br0 PHYSOUT=eth1 SRC=200.30.113.203 DST=11.11.79.95 LEN=48 TOS=0x00 PREC=0x00 TTL=111 ID=11129 DF PROTO=TCP SPT=3734 DPT=445 WINDOW=8760 RES=0x00 SYN URGP=0
+        $line =~ m/\w+ \d+ (\d+:\d+):\d+ (\w+) (\S+).*SRC=(\d+.\d+.\d+.\d+) DST=(\d+.\d+.\d+.\d+) LEN=(\d+).*TTL=(\d+).*SPT=(\d+) DPT=(\d+).*/;
+
+        $src = system("simpleipint $4");
+        $dst = system("simpleipint $5");
+
+        if ($1=="") {
+        } else {
+                if ($7 > 200) {
+                        print "    t=\"$1\",m=\"$2\",src=\"$src\",dst=\"$dst\",len=\"$6\",ttl=\"$7\", spt=\"$8\", dpt=\"$9\" [color=\"red\"];\n";
+                } else {
+        #if ($l =~ m/.*[fF]aile.*/) {
+        #        print "    t=\"$t\",m=\"$m\",a=\"$a\",l=\"$l\" ;\n";
+        #} else {
+                print "    t=\"$1\",m=\"$2\",src=\"$src\",dst=\"$dst\",len=\"$6\",ttl=\"$7\", spt=\"$8\", dpt=\"$9\";\n";
+                }
+        }
+        #}
+}
+
+print "}\n";
+
