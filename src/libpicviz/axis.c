@@ -73,10 +73,21 @@ struct axis_t *picviz_axis_new(void)
         return axis;
 }
 
-void picviz_axis_destroy(struct axis_t *axis)
+void picviz_axis_destroy(struct pcimage_t *image)
 {
-        free(axis->props);
-        free(axis);
+
+        struct llist_head *lcounter, *tmplist;
+        struct axis_t *axistmp;
+
+        if (!image->axes) return;
+
+        llist_for_each_safe(lcounter, tmplist, &image->axes->list) {
+                axistmp = llist_entry(lcounter, struct axis_t, list);
+                llist_del(lcounter);
+                free(axistmp->props);
+                free(axistmp);
+        }
+
 }
 
 struct axis_t *picviz_axis_get(struct pcimage_t *i, unsigned int id)

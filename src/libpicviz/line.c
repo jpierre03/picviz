@@ -68,37 +68,6 @@ void picviz_line_axisplot_append(struct line_t *line, struct axisplot_t *axisplo
         llist_add_tail(&axisplot->list, &line->axisplot->list);
 }
 
-#if 0
-void picviz_line_string_add(struct line_t *line, unsigned int axis_id, char *string)
-{
-        printf("add string:%s\n", string);
-        line->axisplot = picviz_axisplot_new();
-        line->axisplot->axis_id = axis_id;
-        line->axisplot->y = picviz_line_value_get_from_string(string);
-        llist_add_tail(&line->axisplot->list, &line->list);
-}
-void picviz_line_src_dst_set(struct line_t *line, float ysource, float ydest)
-{
-        line->ysource = ysource;
-        line->ydest = ydest;
-}
-
-struct line_t *picviz_line_get(struct axis_t *axis, unsigned int id)
-{
-        struct axis_t *a;
-        struct line_t *l;
-
-        llist_for_each_entry(a, &axis->list, list) {
-                if (a->id == axis->id) {
-                        llist_for_each_entry(l, &a->lines->list, list) {
-                                if (l->id == id) {
-                                        return l;
-                                }
-                        }
-                }
-        }
-}
-#endif
 
 void picviz_line_free(struct line_t *l)
 {
