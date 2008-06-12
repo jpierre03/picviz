@@ -46,7 +46,8 @@ struct axis_properties_t *picviz_axis_properties_new(void)
                 return NULL;
         }
 
-        props->label = strdup("");
+        //props->label = strdup("");
+        props->label = "";
         props->color = ""; /* black */
 
         return props;
@@ -70,6 +71,12 @@ struct axis_t *picviz_axis_new(void)
         axis->ymax = 0;
 
         return axis;
+}
+
+void picviz_axis_destroy(struct axis_t *axis)
+{
+        free(axis->props);
+        free(axis);
 }
 
 struct axis_t *picviz_axis_get(struct pcimage_t *i, unsigned int id)

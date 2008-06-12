@@ -35,39 +35,6 @@ static char *escape_str(char *str)
 }
 
 
-#if 0
-static char *escape_str(char *str)
-{
-	int i = 0;
-	size_t strsize;
-	char *ret;
-
-
-        strsize = strlen(str);
-
-	if (strsize < 2) return strdup("");
-	ret = malloc(strsize - 1);
-        if ( ! ret ) {
-                printf("Cannot allocate string\n");
-                return strdup("");
-        }
-
-        printf("str=[%s]\n", str);
-
-	while (*str) {
-                printf("i=%d\n", i);
-                ret[i] = *str++;
-                i++;
-        }
-
-        ret[i-1] = '\0';
-
-	return ret;
-}
-#endif
-
-
-
 %}
 %option noyywrap
 
@@ -110,7 +77,7 @@ NEWLINE         \n
 		}
 
 {DQSTRING}      {
-                        yylval.string = escape_str(yytext);
+                        yylval.string = strdup(escape_str(yytext));
                         return TOK_DQSTRING;
                 }
 
@@ -121,7 +88,7 @@ NEWLINE         \n
 {EQUAL}		{	return TOK_EQUAL; }
 
 {STRING}	{
-			yylval.string = escape_str(yytext);
+			yylval.string = strdup(escape_str(yytext));
 			return TOK_WORD;
 		}
 

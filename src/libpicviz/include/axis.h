@@ -20,6 +20,7 @@
 
 struct axis_properties_t *picviz_axis_properties_new(void);
 struct axis_t *picviz_axis_init(void);
+void picviz_axis_destroy(struct axis_t *axis);
 struct axis_t *picviz_axis_new(void);
 void picviz_axis_set_type_from_string(struct axis_t *axis, char *string);
 //struct axis_t *picviz_axis_get(struct pcimage_t *i, unsigned int id);

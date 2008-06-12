@@ -40,7 +40,8 @@ struct line_properties_t *picviz_line_properties_new(void)
         }
 
         props->label = "";
-        props->color = strdup("#000000"); /* black */
+        //props->color = strdup("#000000"); /* black */
+        props->color = "#000000"; /* black */
 
         return props;
 }
@@ -113,8 +114,7 @@ void picviz_line_prop_color_set(struct line_t *line, char *color)
 
 char *picviz_line_prop_color_get(struct line_t *line)
 {
-        free(line->props->color);
-        return strdup(line->props->color);
+        return line->props->color;
 }
 
 

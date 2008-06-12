@@ -124,6 +124,9 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                                         }
                                         break;
                         }
+
+                        free($1);
+                        free($3);
 #ifdef DEBUGSR
         printf("<== property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING\n");
 #endif /* DEBUGSR */
@@ -216,9 +219,9 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
 #endif
                         //printf("ma=%d, position=%d\n",max_axes, axis_position);
                         axis_position++;
-                        // TODO: Fix and understand what's going on htiw $3 here
-                        //free($3);
-                        //free($1);
+
+                        free($3);
+                        free($1);
                 }
 #ifdef DEBUGSR
         printf("<== dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING\n");
