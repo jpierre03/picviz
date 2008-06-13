@@ -93,7 +93,7 @@ u_int32_t ipstr2i(char *quad)
 /*
  * We first calculate values without caring of that axis min and max
  */
-float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
+PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
 {
         float factor = 0;
         size_t strsize;
@@ -129,20 +129,20 @@ float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
                                 strncpy(min, string + 3, 2);
                                 min[2] = '\0';
 
-                                factor = (float)((atoi(hour) * 60) * 60) + (atoi(min) * 60);
+                                factor = (PcvHeight)((atoi(hour) * 60) * 60) + (atoi(min) * 60);
 
                                 free(hour);
                                 free(min);
                         }
                         break;
                 case DATATYPE_IPV4:
-                        factor = (float)ipstr2i(string);
+                        factor = (PcvHeight)ipstr2i(string);
                         break;
                 case DATATYPE_GOLD:
-                        factor = (float)atoi(string);
+                        factor = (PcvHeight)atoi(string);
                         break;
                 case DATATYPE_CHAR:
-                        factor = (float)atoi(string);
+                        factor = (PcvHeight)atoi(string);
                         break;
                 default:
                         fprintf(stderr, "Cannot map value from choosen variable\n");
@@ -151,7 +151,7 @@ float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
         return factor;
 }
 
-PcvAxisY picviz_values_mapping_get_from_y(struct pcimage_t *image, float max_val, PcvAxisY y)
+PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight max_val, PcvHeight y)
 {
 
         return ((image->height - image->header_height) / max_val) * y;
@@ -163,7 +163,7 @@ PcvAxisY picviz_values_mapping_get_from_y(struct pcimage_t *image, float max_val
 
 int main(void)
 {
-        float f;
+        PcvHeight f;
         int i;
 
         f = picviz_line_value_get_from_string_dummy(DATATYPE_STRING, STRING_TYPE_MAX);

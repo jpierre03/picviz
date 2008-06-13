@@ -18,7 +18,10 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-typedef float PcvAxisY;
+typedef unsigned int PcvHeight;
+typedef unsigned int PcvWidth;
+typedef unsigned int PcvID;
+typedef char *       PcvString;
 
 #endif /* _TYPE_H_ */
 

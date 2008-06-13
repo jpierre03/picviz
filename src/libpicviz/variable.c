@@ -17,7 +17,7 @@
 
 #include <picviz.h>
 
-PcvAxisY picviz_variable_max(datatype_t vartype)
+PcvHeight picviz_variable_max(datatype_t vartype)
 {
 
         switch (vartype) {

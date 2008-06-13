@@ -23,12 +23,11 @@
 struct line_properties_t *picviz_line_properties_new(void);
 struct line_t *picviz_line_init(void);
 struct line_t *picviz_line_new(void);
-void picviz_line_src_dst_set(struct line_t *line, float ysource, float ydest);
-struct line_t *picviz_line_get(struct axis_t *axis, unsigned int id);
-void picviz_line_prop_color_set(struct line_t *line, char *color);
+struct line_t *picviz_line_get(struct axis_t *axis, PcvID id);
+void picviz_line_prop_color_set(struct line_t *line, PcvString color);
 char *picviz_line_prop_color_get(struct line_t *line);
 void picviz_lines_axisplot_append(struct line_t *line, struct axisplot_t *axisplot);
-float picviz_line_max_get(struct line_t *line, unsigned int axis_id);
-float picviz_line_max_pertype_get(struct pcimage_t *image, datatype_t type);
+PcvHeight picviz_line_max_get(struct line_t *line, PcvID axis_id);
+PcvHeight picviz_line_max_pertype_get(struct pcimage_t *image, datatype_t type);
 
 #endif /* _LINE_H_ */

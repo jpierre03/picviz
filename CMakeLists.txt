@@ -2,6 +2,8 @@
 
 project(picviz)
 
+cmake_minimum_required(VERSION 2.4)
+
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${picviz_SOURCE_DIR}/cmake)
 FIND_PACKAGE(FLEX)
 FIND_PACKAGE(BISON)

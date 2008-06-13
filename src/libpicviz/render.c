@@ -30,8 +30,8 @@ void picviz_render_image(pcimage_t *image)
 //        int nb_axes = 0;
         int i = 0;
         int nb_types = sizeof(datatype_t);
-        PcvAxisY string_max[PICVIZ_MAX_AXES];
-        PcvAxisY maxval;
+        PcvHeight string_max[PICVIZ_MAX_AXES];
+        PcvHeight maxval;
 
         int axis_label_exists = 0;
 

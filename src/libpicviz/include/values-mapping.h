@@ -18,7 +18,7 @@
 #ifndef _VALUES_MAPPING_H_
 #define _VALUES_MAPPING_H_
 
-float picviz_line_value_get_from_string_dummy(datatype_t type, char *string);
-PcvAxisY picviz_values_mapping_get_from_y(struct pcimage_t *image, float max_val, PcvAxisY y);
+PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, PcvString string);
+PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight max_val, PcvHeight y);
 
 #endif /* _VALUES_MAPPING_H_ */

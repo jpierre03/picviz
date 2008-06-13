@@ -37,7 +37,7 @@
 #define GOLDNUMBER_TYPE_MAX_YVAL 1433
 #define IPV4_TYPE_MAX_YVAL 4294967295
 
-PcvAxisY picviz_variable_max(datatype_t vartype);
+PcvHeight picviz_variable_max(datatype_t vartype);
 
 #endif /* _VARIABLE_H_ */
 

@@ -15,11 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "linuxlist.h"
-#include "engine.h"
-
 #ifndef _PCIMAGE_H_
 #define _PCIMAGE_H_
+
+#include "linuxlist.h"
+#include "engine.h"
+#include "types.h"
 
 typedef enum datatype_t {
         DATATYPE_EMPTY,
@@ -34,43 +35,43 @@ typedef enum datatype_t {
 } datatype_t;
 
 typedef struct axis_properties_t {
-        char *label;
-        char *color;
+        PcvString label;
+        PcvString color;
 } axis_properties_t;
 
 typedef struct line_properties_t {
-        char *label;
-        char *color;
+        PcvString label;
+        PcvString color;
 } line_properties_t;
 
 typedef struct axisplot_t {
         struct llist_head list;
-        char *strval; /* This is the string value of the ysource, to put (optionally) in the graph */
-        float y;         /* where does the line goes on this axis */
-        unsigned int axis_id; /* id of the axis we positionate the line to */
+        PcvString strval; /* This is the string value of the ysource, to put (optionally) in the graph */
+        PcvHeight y;         /* where does the line goes on this axis */
+        PcvID axis_id; /* id of the axis we positionate the line to */
 } axisplot_t;
 
 typedef struct line_t {
         struct llist_head list;
-        unsigned int id;
+        PcvID id;
         struct axisplot_t *axisplot;
         struct line_properties_t *props;
 } line_t;
 
 typedef struct axis_t {
         struct llist_head list;
-        unsigned int id;
+        PcvID id;
         struct axis_properties_t *props;
         datatype_t type;
-        unsigned int   xpos;     /* pos of the axis */
-        float ymin; /* Where we start (top): Not max line, max of what we see */
-        float ymax; /* Where we end (botton): Not min line */
+        PcvWidth  xpos;  /* pos of the axis */
+        PcvHeight ymin;  /* Where we start (top): Not max line, max of what we see */
+        PcvHeight ymax;  /* Where we end (botton): Not min line */
 } axis_t;
 
 typedef struct pcimage_t {
-        unsigned int width;
-        unsigned int height;
-        unsigned int header_height;
+        PcvWidth  width;
+        PcvHeight height;
+        PcvHeight header_height;
 
         enum position_t zero_pos; /* where the zero value is on the axes */
 

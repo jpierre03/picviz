@@ -27,7 +27,7 @@
 #include "axis.h"
 #include "line.h"
 
-static unsigned int id = 0;
+static PcvID id = 0;
 
 struct line_properties_t *picviz_line_properties_new(void)
 {
@@ -76,24 +76,24 @@ void picviz_line_free(struct line_t *l)
 
 }
 
-void picviz_line_prop_color_set(struct line_t *line, char *color)
+void picviz_line_prop_color_set(struct line_t *line, PcvString color)
 {
         line->props->color = picviz_color_named_to_hexstr(color);
 }
 
-char *picviz_line_prop_color_get(struct line_t *line)
+PcvString picviz_line_prop_color_get(struct line_t *line)
 {
         return line->props->color;
 }
 
 
-float picviz_line_max_get(struct line_t *line, unsigned int axis_id)
+PcvHeight picviz_line_max_get(struct line_t *line, PcvID axis_id)
 {
         struct axis_t *a;
         struct line_t *l;
         struct axisplot_t *axisplot;
         char init = 0;
-        float max = -1;
+        PcvHeight max = 0;
 
         llist_for_each_entry(l, &line->list, list) {
                 llist_for_each_entry(axisplot, &l->axisplot->list, list) {
@@ -111,14 +111,14 @@ float picviz_line_max_get(struct line_t *line, unsigned int axis_id)
         return max;
 }
 
-PcvAxisY picviz_line_max_pertype_get(struct pcimage_t *image, datatype_t type)
+PcvHeight picviz_line_max_pertype_get(struct pcimage_t *image, datatype_t type)
 {
         struct line_t *line;
         struct axisplot_t *axisplot;
         int i;
         int nb_types = sizeof(datatype_t);
         char init[nb_types];
-        PcvAxisY max[nb_types];
+        PcvHeight max[nb_types];
 
         for ( i = 0; i <= nb_types; i++) {
                 init[i] = 0;
@@ -139,39 +139,7 @@ PcvAxisY picviz_line_max_pertype_get(struct pcimage_t *image, datatype_t type)
                         }
                 }
         }
-#if 0
-        llist_for_each_entry(l, &line->list, list) {
-                llist_for_each_entry(axisplot, &l->axisplot->list, list) {
-                        struct axis_t *axis = picviz_axis_get(image, axisplot->axis_id);
-
-                                if ( ! init ) {
-                                        init = 1;
-                                        max[type] = axisplot->y;
-                                }
-
-                                if ( axisplot->y > max ) max = axisplot->y;
-                }
-        }
-#endif
 
         return max[type];
 }
 
-#if 0
-float picviz_line_min_get(unsigned int id)
-{
-        struct line_t *l;
-        char init = 0;
-        float min = 0;
-
-        llist_for_each_entry(l, &axis->lines->list, list) {
-                if ( ! init ) {
-                        init = 1;
-                        min = l->ysource;
-                }
-                if (l->ysource < min) min = l->ysource;
-        }
-
-        return min;
-}
-#endif
