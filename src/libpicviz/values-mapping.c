@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -99,7 +100,6 @@ float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
         char *hour;
         char *min;
 
-
         switch (type) {
                 case DATATYPE_EMPTY:
                         break;
@@ -121,8 +121,8 @@ float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
                 case DATATYPE_TIMELINE:
                         strsize = strlen(string);
                         if (strsize == 5) { /* 10:42 */
-                                hour = malloc(2);
-                                min  = malloc(2);
+                                hour = malloc(3);
+                                min  = malloc(3);
 
                                 strncpy(hour, string, 2);
                                 hour[2] = '\0';
@@ -144,7 +144,8 @@ float picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
                 case DATATYPE_CHAR:
                         factor = (float)atoi(string);
                         break;
-
+                default:
+                        fprintf(stderr, "Cannot map value from choosen variable\n");
         }
 
         return factor;

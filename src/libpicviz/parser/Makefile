@@ -1,7 +1,7 @@
 YACC=bison
 LEX=flex
 CC=gcc
-CFLAGS=-D_UNIT_TEST_ -g -I../ -I../include -DDEBUGPROPERTY -DDEBUGSR
+CFLAGS=-D_UNIT_TEST_ -g -I../ -I../include -DDEBUGSR
 LIBS=-lfl -ly -lpicviz
 
 all: parser

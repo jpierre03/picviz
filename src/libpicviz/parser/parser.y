@@ -119,8 +119,8 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                                 case AXES:
                                         if (!strcmp("label",$1))
                                         {
-                                                //printf("axis label=%s\n", $3);
-                                                axis_label = $3;
+                                                printf("axis label=%s\n", $3);
+                                                axis_label = strdup($3);
                                         }
                                         break;
                         }
@@ -207,7 +207,7 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
 
                         axisplot = picviz_axisplot_new();
                         //axisplot->strval = strdup($3);
-                        axisplot->strval = $3;
+                        axisplot->strval = strdup($3);
                         /* We first dump data into the structure, we render latter */
                         //axisplot->y = picviz_line_value_get_from_string($3);
                         axisplot->axis_id = axis_position + 1;
