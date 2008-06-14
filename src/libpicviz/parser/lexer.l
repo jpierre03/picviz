@@ -19,7 +19,7 @@ static char *escape_str(char *str)
         size_t w = 0, i = 0;
         int escape_next = 0;
 
-        for ( i = 0; str[i]; i++ ) {
+        for ( i = 1; str[i]; i++ ) {
 
                 if ( ! escape_next && str[i] == '\\' ) {
                         escape_next = 1;
@@ -30,7 +30,7 @@ static char *escape_str(char *str)
                 escape_next = 0;
         }
 
-        str[w] = 0;
+        str[w - 1] = '\0';
         return str;
 }
 

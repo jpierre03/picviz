@@ -95,22 +95,23 @@ u_int32_t ipstr2i(char *quad)
  */
 PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
 {
-        float factor = 0;
+        PcvHeight factor = 0;
         size_t strsize;
         char *hour;
         char *min;
+
 
         switch (type) {
                 case DATATYPE_EMPTY:
                         break;
                 case DATATYPE_SHORT:
-                        factor = atoi(string);
+                        factor = (PcvHeight)strtoul(string, NULL, 10);
                         break;
                 case DATATYPE_INTEGER:
-                        factor = atoi(string);
+                        factor = (PcvHeight)strtoul(string, NULL, 10);
                         break;
                 case DATATYPE_FLOAT:
-                        factor = strtof(string, NULL);
+                        factor = (PcvHeight)strtoul(string, NULL, 10);
                         break;
                 case DATATYPE_STRING:
                         while (*string++) {
@@ -153,8 +154,13 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
 
 PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight max_val, PcvHeight y)
 {
+        float value;
 
-        return ((image->height - image->header_height) / max_val) * y;
+        value = (float)(image->height - image->header_height) / max_val;
+
+        value *= y;
+
+        return (PcvHeight)value;
 
 }
 

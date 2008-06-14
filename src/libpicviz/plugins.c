@@ -41,8 +41,8 @@ void image_to_svg(pcimage_t *i)
         struct line_t *l;
         struct axisplot_t *axisplot;
 
-        int last_x = -1;
-        float last_y = -1;
+        PcvWidth  last_x = -1;
+        PcvHeight last_y = -1;
 
         printf("<?xml version=\"1.0\" standalone=\"no\"?>\n");
         printf("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
@@ -70,7 +70,7 @@ void image_to_svg(pcimage_t *i)
                                 last_y = axisplot->y + i->header_height;
                                 last_x = axis->xpos;
                         } else {
-                                printf("<line x1=\"%d\" y1=\"%.2f\" x2=\"%d\" y2=\"%.2f\" stroke=\"%s\" stroke-width=\"0.1\"/>\n",
+                                printf("<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke=\"%s\" stroke-width=\"0.1\"/>\n",
                                                 last_x, last_y, axis->xpos, axisplot->y + i->header_height, l->props->color);
                                 last_x = axis->xpos;
                                 last_y = axisplot->y + i->header_height;

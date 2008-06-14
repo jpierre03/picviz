@@ -27,13 +27,16 @@ void picviz_render_image(pcimage_t *image)
         struct axis_t *axis;
         struct line_t *line;
         struct axisplot_t *axisplot;
-//        int nb_axes = 0;
         int i = 0;
         int nb_types = sizeof(datatype_t);
         PcvHeight string_max[PICVIZ_MAX_AXES];
         PcvHeight maxval;
 
         int axis_label_exists = 0;
+
+        PcvHeight strheight;
+        PcvHeight mappedval;
+
 
         llist_for_each_entry(axis, &image->axes->list, list) {
                 if (strcmp(axis->props->label, "")) {
@@ -57,39 +60,11 @@ void picviz_render_image(pcimage_t *image)
                                         maxval = string_max[axisplot->axis_id];
                                 }
                         }
-                        axisplot->y = picviz_values_mapping_get_from_y(image, maxval,
-                                                picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval)
-                                        );
+
+                        strheight = picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval);
+                        mappedval = picviz_values_mapping_get_from_y(image, maxval, strheight);
+
+                        axisplot->y = mappedval;
                 }
         }
-
-//#endif
-
-#if 0
-        /* Recalculate values */
-        llist_for_each_entry(line, &image->lines->list, list) {
-                llist_for_each_entry(axisplot, &line->axisplot->list, list) {
-                        struct axis_t *axis = (struct axis_t *)picviz_axis_get(image, axisplot->axis_id);
-                        axisplot->y = picviz_values_mapping_get_from_y(image, maxval, axisplot->y);
-                }
-        }
-#endif
-#if 0
-// Take the max value per axis
-// it can be an wanted behavior
-// but I don't like it
-        for ( i = 1; i <= nb_axes; i++ ) {
-                max[i] = picviz_line_max_get(image->lines, i);
-                //printf("MAX FOR %d: %.2f\n", i, max);
-        }
-
-        llist_for_each_entry(line, &image->lines->list, list) {
-                llist_for_each_entry(axisplot, &line->axisplot->list, list) {
-                        axisplot->y = picviz_values_mapping_get_from_y(image, max[axisplot->axis_id], axisplot->y);
-                }
-        }
-#endif
-
-//        printf("MAX = %.2f\n", max);
-
 }
