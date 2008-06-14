@@ -111,7 +111,7 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                         switch (section_state) {
                                 case DATA:
                                        if (!strcmp("color",$1)) {
-                                                line_color = $3;
+                                                line_color = strdup($3);
                                                 //picviz_line_prop_color_set(line, $3);
                                         }
                                         // Add line property
@@ -119,7 +119,6 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                                 case AXES:
                                         if (!strcmp("label",$1))
                                         {
-                                                printf("axis label=%s\n", $3);
                                                 axis_label = strdup($3);
                                         }
                                         break;

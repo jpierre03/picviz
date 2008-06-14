@@ -24,7 +24,7 @@
  */
 #define STRING_TYPE_MAX "The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague."
 /* Same value but calculated using values-mapping (_UNIT_TEST_) */
-#define STRING_TYPE_MAX_YVAL 16105.00
+#define STRING_TYPE_MAX_YVAL 16105
 
 #define EMPTY_TYPE_MAX_YVAL 1 /* Will make disorder and help folks writting better pcv file */
 
