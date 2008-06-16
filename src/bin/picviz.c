@@ -19,6 +19,8 @@ int main(int argv, char **argc)
                 exit(1);
         }
 
+        //picviz_render_image(image);
+        //picviz_image_debug_printall(image);
         image_to_svg(image);
 
         picviz_image_destroy(image);

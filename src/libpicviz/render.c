@@ -37,13 +37,24 @@ void picviz_render_image(pcimage_t *image)
         PcvHeight strheight;
         PcvHeight mappedval;
 
+        for ( i = 0; i <= PICVIZ_MAX_AXES; i++) {
+                string_max[i] = picviz_variable_max(DATATYPE_STRING);
+        }
 
-        llist_for_each_entry(axis, &image->axes->list, list) {
-                if (strcmp(axis->props->label, "")) {
-                        axis_label_exists = 1;
+        llist_for_each_entry(line, &image->lines->list, list) {
+                llist_for_each_entry(axisplot, &line->axisplot->list, list) {
+                        struct axis_t *axis = (struct axis_t *)picviz_axis_get(image, axisplot->axis_id);
+                        if (strcmp(axis->props->label, "")) {
+                                axis_label_exists = 1;
+                        }
+
+                        if (axis->type == DATATYPE_STRING) {
+                                strheight = picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval);
+                                if (strheight > string_max[axisplot->axis_id]) {
+                                        string_max[axisplot->axis_id] = strheight;
+                                }
+                        }
                 }
-                string_max[i] = picviz_line_max_get(image->lines, i);
-                i++;
         }
 
         if (!axis_label_exists) {
@@ -55,14 +66,13 @@ void picviz_render_image(pcimage_t *image)
                 llist_for_each_entry(axisplot, &line->axisplot->list, list) {
                         struct axis_t *axis = (struct axis_t *)picviz_axis_get(image, axisplot->axis_id);
                         maxval = picviz_variable_max(axis->type);
-                        if (axis->type == DATATYPE_STRING) {
-                                if (string_max[axisplot->axis_id] > picviz_variable_max(axis->type)) {
-                                        maxval = string_max[axisplot->axis_id];
-                                }
-                        }
 
                         strheight = picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval);
-                        mappedval = picviz_values_mapping_get_from_y(image, maxval, strheight);
+                        if (axis->type == DATATYPE_STRING) {
+                                mappedval = picviz_values_mapping_get_from_y(image, string_max[axisplot->axis_id], strheight);
+                        } else {
+                                mappedval = picviz_values_mapping_get_from_y(image, maxval, strheight);
+                        }
 
                         axisplot->y = mappedval;
                 }

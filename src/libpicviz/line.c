@@ -95,13 +95,19 @@ PcvHeight picviz_line_max_get(struct line_t *line, PcvID axis_id)
         char init = 0;
         PcvHeight max = 0;
 
+        printf("We should return the max value if the axis %d\n", axis_id);
+
         llist_for_each_entry(l, &line->list, list) {
                 llist_for_each_entry(axisplot, &l->axisplot->list, list) {
+                        printf("Y VAL=%d\n", axisplot->y);
                         if (axis_id == axisplot->axis_id) {
                                 if ( ! init ) {
+                                        printf("INIT\n");
                                         init = 1;
                                         max = axisplot->y;
                                 }
+
+                                printf("max=%d, axisplot->y =%d\n", max, axisplot->y);
 
                                 if ( axisplot->y > max ) max = axisplot->y;
                         }

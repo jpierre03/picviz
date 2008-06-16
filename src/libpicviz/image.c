@@ -104,7 +104,7 @@ void picviz_image_debug_printall(struct pcimage_t *i)
                 printf("l->props->color=%s\n", l->props->color);
                 llist_for_each_entry(axisplot, &l->axisplot->list, list) {
                         printf("    axisplot->strval=%s\n", axisplot->strval);
-                        printf("    axisplot->y=%.2f\n", axisplot->y);
+                        printf("    axisplot->y=%d\n", axisplot->y);
                         printf("    axisplot->axis_id=%d\n", axisplot->axis_id);
                 }
         }

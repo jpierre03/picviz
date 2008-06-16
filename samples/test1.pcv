@@ -8,6 +8,6 @@ axes {
 }
 data {
    t="14:42", i="123", s="foobar" [color="red"];
-   t="14:45", i="234", s="abcdse";
+   t="14:45", i="234", s="abcfdsadse";
 }
 
