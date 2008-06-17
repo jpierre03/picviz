@@ -28,7 +28,7 @@ int max_axes = 0; /* to know if we should clean lines_values */
 struct pcimage_t *image;
 struct line_t *line;
 int i = 0;
-char *line_color = "#000000";
+char *line_color;
 char *axis_label = "";
 
 #define YY_ABORT return -1;
@@ -238,6 +238,7 @@ key_value_data: dataval TOK_OPEN_PROP property TOK_CLOSE_PROP TOK_SEMICOLON
 #endif /* DEBUGSR */
                         if ( section_state == DATA ) {
                                 picviz_line_prop_color_set(line, line_color);
+                                free(line_color);
                                 picviz_image_line_append(image, line);
                         }
 #if 0
@@ -318,6 +319,7 @@ struct pcimage_t *pcv_parse(char *filename)
                 fprintf(stderr, "Cannot open file '%s'\n", filename);
                 return NULL;
         }
+        line_color = strdup("#000000");
         yyparse();
 
         picviz_render_image(image);
