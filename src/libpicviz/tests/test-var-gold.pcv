@@ -1,0 +1,14 @@
+header {
+    title = "Gold Variable Test";
+}
+axes {
+    gold axis1;
+    gold axis2;
+    gold axis3;
+    gold axis4;
+    gold axis5;
+}
+data {
+    axis1="0",axis2="1433",axis3="0",axis4="1433",axis5="42";
+}
+
