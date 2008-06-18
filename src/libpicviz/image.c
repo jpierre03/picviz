@@ -45,7 +45,7 @@ struct pcimage_t *picviz_image_new(void)
 
 void picviz_image_destroy(struct pcimage_t *image)
 {
-        picviz_axis_destroy(image->axes);
+        picviz_axis_destroy(image);
 
         //free(image->lines->props->color);
         free(image->lines->props);
