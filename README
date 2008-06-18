@@ -8,5 +8,5 @@ make install
 
 Use
 ===
-picviz file.pcv
+pcv file.pcv
 
