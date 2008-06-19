@@ -29,6 +29,7 @@ typedef struct engine_t {
         unsigned int axis_x_cursor; /* We move where the X pos of the axis must be put everytime we add one */
         unsigned int axis_default_space;
         enum position_t zero_position;
+        int display_raw_data;
 } engine_t;
 
 

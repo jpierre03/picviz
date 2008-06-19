@@ -28,6 +28,9 @@ int main(int argv, char **argc)
                 } else if ( ! strcmp(argc[2], "-render") ) {
                         picviz_render_image(image);
                         picviz_image_debug_printall(image);
+                } else if ( ! strcmp(argc[2], "-raw")) {
+                        engine.display_raw_data = 1;
+                        image_to_svg(image);
                 } else {
                         fprintf(stderr, "Unknown parameter %s\n", argc[2]);
                 }

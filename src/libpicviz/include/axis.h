@@ -18,7 +18,8 @@
 #ifndef _AXIS_H_
 #define _AXIS_H_
 
-#include <pcimage.h>
+#include "pcimage.h"
+//#include <picviz.h>
 
 struct axis_properties_t *picviz_axis_properties_new(void);
 struct axis_t *picviz_axis_init(void);

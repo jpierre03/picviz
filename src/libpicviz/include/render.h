@@ -18,6 +18,8 @@
 #ifndef _RENDER_H_
 #define _RENDER_H_
 
+#include <pcimage.h>
+
 void picviz_render_image(pcimage_t *image);
 
 #endif /* _RENDER_H_ */

@@ -77,6 +77,9 @@ void image_to_svg(pcimage_t *i)
                                 last_y = axisplot->y + i->header_height;
 
                         }
+                        if (engine.display_raw_data) {
+                                printf("<text style=\"fill:black;font-size:5px;font-family:Courier 10 Pitch\" x=\"%d\" y=\"%d\">%s</text>\n", axis->xpos, axisplot->y + i->header_height, axisplot->strval);
+                        }
                 }
         }
 

@@ -116,6 +116,7 @@ void picviz_init(void)
         engine.axis_default_space = 100;
         engine.axis_x_cursor = engine.axis_default_space / 2;
         engine.zero_position = TOP;
+        engine.display_raw_data = 0;
 
         //fprintf(stdout, "Picviz - (c) 2008 Sebastien Tricaud\n");
         //fprintf(stdout, "[+] Loaded render plugins:\n");

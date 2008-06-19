@@ -18,9 +18,10 @@
 #ifndef _PLUGINS_H_
 #define _PLUGINS_H_
 
+//#include <picviz.h>
 #include "pcimage.h"
 
-void image_to_svg(pcimage_t *image);
+void image_to_svg(struct pcimage_t *image);
 
 #endif /* _PLUGINS_H_ */
 

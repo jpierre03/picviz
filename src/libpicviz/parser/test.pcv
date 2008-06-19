@@ -1,6 +1,9 @@
 header {
     title = "Syslog picviz analysis";
 }
+engine {
+        axis_default_space = "200";
+}
 axes {
     timeline t [label="timeline"];
     short   i;

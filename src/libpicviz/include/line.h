@@ -18,7 +18,9 @@
 #ifndef _LINE_H_
 #define _LINE_H_
 
-#include <picviz.h>
+//#include <picviz.h>
+#include "types.h"
+#include "pcimage.h"
 
 struct line_properties_t *picviz_line_properties_new(void);
 struct line_t *picviz_line_init(void);

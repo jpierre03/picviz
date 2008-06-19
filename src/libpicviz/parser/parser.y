@@ -219,9 +219,14 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
                         //printf("ma=%d, position=%d\n",max_axes, axis_position);
                         axis_position++;
 
-                        free($3);
-                        free($1);
+                } else if ( section_state == ENGINE ) {
+                        if ( ! strcmp($1, "axis_default_space") ) {
+                                engine.axis_default_space = atoi($3);
+                        }
                 }
+
+                free($3);
+                free($1);
 #ifdef DEBUGSR
         printf("<== dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING\n");
 #endif /* DEBUGSR */

@@ -29,6 +29,7 @@
 #include "pcimage.h"
 #include "plugins.h"
 #include "properties.h"
+#include "render.h"
 #include "types.h"
 #include "values-mapping.h"
 #include "variable.h"
