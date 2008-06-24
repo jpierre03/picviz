@@ -11,8 +11,151 @@
 <hr/>
 
 <h2>Introduction</h2>
+<p>
 Picviz goal is to provide a language, a library and applications to realize parallel plot coordinates graphs easily.
-
+To help you realizing your graph, it delivers a set of types you can decide your axes to be. Everytime a value is added,
+it is positioned accordingly.
+</p>
+<p>
+Since Picviz is focused on computer security data analysis, its default types are time, ip address, string or various
+kind of numbers.
+</p>
+<h2>The PCV language</h2>
+<p>
+The PCV language goal is to remain as simple as possible to map your values on your axes. It is made of at least two
+sections that are <b>axes</b> definitions and their attached <b>data</b>. Two extra sections are possible: <b>header</b>
+to define special properties related to your image and <b>engine</b>, to change the picviz engine behavior.
+</p>
+<p>
+The order of each section is only important for <b>axes</b> and <b>data</b>, but a good PCV file should look like:
+<pre>
+header {
+ ...
+}
+engine {
+ ...
+}
+axes {
+ ...
+}
+data {
+ ...
+}
+</pre>
+</p>
+<h2>Header section</h2>
+<p>
+The header section can now only set the graph title. So this only way to use it is like this:
+<pre>
+header {
+   title = "Graph title";
+}
+</pre>
+</p>
+<h2>Axis section</h2>
+<p>
+The axis section is appears like this:
+<pre>
+axes {
+ ...
+}
+</pre>
+Where '<i>...</i>' is your definition of axes types and properties. For example, if you want to add two axes able to receive data ranging from 0 to 65535, you should declare it as:
+<pre>
+axes {
+        integer myaxis;
+        integer thesecond;
+}
+</pre>
+And if you want to set a label on your axis to ease its recognition, you may add the label property:
+<pre>
+axes {
+        integer myaxis [label="My first axis"];
+        integer thesecond [label="The next one"];
+}
+</pre>
+</p>
+<h3>Axis type</h3>
+Every axis my be declared with a type, which can be:
+<div align="center">
+        <table border="1">
+        <tr align="center">
+        <td>Type</td><td>Range</td><td>Description</td>
+        </tr>
+        <tr align="center">
+        <td>timeline</td><td>"00:00" - "23:59"</td><td>24 hours time value</td>
+        </tr>
+        <tr align="center">
+        <td>integer</td><td>0 - 65535</td><td>Integer number</td>
+        </tr>
+        <tr align="center">
+        <td>float</td><td>0.00 - 65534.99</td><td>Floating number</td>
+        </tr>
+        <tr align="center">
+        <td>string</td><td>"" - "The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague."</td><td>A string value</td>
+        </tr>
+        <tr align="center">
+        <td>short</td><td>0 - 32767</td><td>Short number</td>
+        </tr>
+        <tr align="center">
+        <td>ipv4</td><td>0.0.0.0 - 255.255.255.255</td><td>IPv4 address</td>
+        </tr>
+        <tr align="center">
+        <td>gold</td><td>0 - 1433</td><td>A small value, where the gold number is the maximum</td>
+        </tr>
+        <tr align="center">
+        <td>char</td><td>0 - 255</td><td>A value that can be seen as a char</td>
+        </tr>
+        </table>
+</div>
+<h3>Axis properties</h3>
+<ul>
+<li><b>label</b>: sets the label to display with the graph</li>
+</ul>
+<h2>Data section</h2>
+<p>
+The data section positionates values on the axes. Its syntax is:
+<pre>
+   axis1="value", axis2="value, ... [prop1="val", prop2="val"];
+</pre>
+The value must fit the axis type. And the properties are applied on the whole line. If we deal with a string,
+we map the string value with our special string: "<i>The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague.</i>". This is a special
+trick to avoid your biggest string to be always on the maximum value to give you an idea when dealing with several
+string axes. However, if among data a bigger string is set, it will become the biggest reference for the other strings.
+</p>
+<h3>Data properties</h3>
+<ul>
+<li><b>color</b>: sets the line color (red, blue, ...)</li>
+</ul>
+<h3>Getting dirty</h3>
+<p>
+Right now, you have enough to get started, so we first want to map values on three kinds of axes: time value, integer and a string.
+The PCV file 'ex1.pcv' code should look like:
+<pre>
+header {
+        title = "My first graph";
+}
+axes {
+        timeline time [label="Time"];
+        integer  nb   [label="Number"];
+        string   str  [label="My string"];
+}
+data {
+        time="0:00",nb="4242",str="This is my first string";
+        time="12:00",nb="4242",str="This is my second string" [color="red"];
+        time="15:00",nb="45986",str="This string is a bit bigger than the other ones" [color="blue"];
+}
+</pre>
+Then, using the <b>pcv</b> program like this:
+<pre>
+$ pcv ex1.pcv &gt; ex1.svg
+</pre>
+And it should look like this:
+<div align="center">
+<img src="images/ex1.png" />
+</div>
+As you can see, the way strings are mapped inform you wether a string is close to an other or not. This is useful to discover a ssh scanning activity based on, say, a username change. The data here where of course choosen to be easily recognized using the color property to understand what you see.
+</p>
 </body>
 </html>
 

@@ -1,0 +1,14 @@
+header {
+        title = "My first graph";
+}
+axes {
+        timeline time [label="Time"];
+        integer  nb   [label="Number"];
+        string   str  [label="My string"];
+}
+data {
+        time="0:00",nb="4242",str="This is my first string";
+        time="12:00",nb="4242",str="This is my second string" [color="red"];
+        time="15:00",nb="45986",str="This string is a bit bigger than the other ones" [color="blue"];
+}
+
