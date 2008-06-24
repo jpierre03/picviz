@@ -7,8 +7,8 @@ int main(int argv, char **argc)
 {
         struct pcimage_t *image;
 
-        if (argv < 2) {
-                fprintf(stderr, "Syntax: %s file.pcv [-debug|-render]\n",argc[0]);
+        if ((argv < 2) || ( ! strcmp(argc[1], "--help") )) {
+                fprintf(stderr, "Syntax: %s file.pcv [-debug|-render|-raw]\n",argc[0]);
                 exit(1);
         }
 
