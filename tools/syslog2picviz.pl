@@ -19,6 +19,9 @@ print "data {\n";
 while ($line = <>) {
 
         $line =~ s/\"/\\"/g; # We escape our quotes
+        $line =~ s/&//g; # We escape our quotes
+        $line =~ s/<//g; # We escape our quotes
+        $line =~ s/>//g; # We escape our quotes
         $line =~ m/\w+ \d+ (\d+:\d+):\d+ (\w+) (\S+) (.*)/;
 
         $t=$1;
@@ -29,7 +32,7 @@ while ($line = <>) {
         if ($a =~ m/.*kernel.*/) {
                 print "    t=\"$t\",m=\"$m\",a=\"$a\",l=\"$l\" [color=\"red\"];\n";
         } else {
-                print "    t=\"$t\",m=\"$m\",a=\"$a\",l=\"$l\";\n";
+                        print "    t=\"$t\",m=\"$m\",a=\"$a\",l=\"$l\";\n";
         }
 }
 

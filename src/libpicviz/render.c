@@ -41,12 +41,14 @@ void picviz_render_image(pcimage_t *image)
                 string_max[i] = picviz_variable_max(DATATYPE_STRING);
         }
 
+        if (! engine.__axis_label_exists) {
+                image->header_height = 0;
+        }
+
+
         llist_for_each_entry(line, &image->lines->list, list) {
                 llist_for_each_entry(axisplot, &line->axisplot->list, list) {
                         struct axis_t *axis = (struct axis_t *)picviz_axis_get(image, axisplot->axis_id);
-                        if (strcmp(axis->props->label, "")) {
-                                axis_label_exists = 1;
-                        }
 
                         if (axis->type == DATATYPE_STRING) {
                                 strheight = picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval);
@@ -54,17 +56,7 @@ void picviz_render_image(pcimage_t *image)
                                         string_max[axisplot->axis_id] = strheight;
                                 }
                         }
-                }
-        }
 
-        if (!axis_label_exists) {
-                image->header_height = 0;
-        }
-
-        /* Set Y values */
-        llist_for_each_entry(line, &image->lines->list, list) {
-                llist_for_each_entry(axisplot, &line->axisplot->list, list) {
-                        struct axis_t *axis = (struct axis_t *)picviz_axis_get(image, axisplot->axis_id);
                         maxval = picviz_variable_max(axis->type);
 
                         strheight = picviz_line_value_get_from_string_dummy(axis->type, axisplot->strval);
@@ -77,4 +69,5 @@ void picviz_render_image(pcimage_t *image)
                         axisplot->y = mappedval;
                 }
         }
+
 }

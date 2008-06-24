@@ -120,6 +120,7 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                                         if (!strcmp("label",$1))
                                         {
                                                 axis_label = strdup($3);
+                                                engine.__axis_label_exists = 1;
                                         }
                                         break;
                         }
