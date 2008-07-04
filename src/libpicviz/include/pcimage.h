@@ -31,7 +31,8 @@ typedef enum datatype_t {
         DATATYPE_SHORT,
         DATATYPE_IPV4,
         DATATYPE_GOLD,
-        DATATYPE_CHAR
+        DATATYPE_CHAR,
+        DATATYPE_EPOCH
 } datatype_t;
 
 typedef struct axis_properties_t {

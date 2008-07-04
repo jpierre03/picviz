@@ -104,14 +104,13 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
         switch (type) {
                 case DATATYPE_EMPTY:
                         break;
+                case DATATYPE_FLOAT:
+                case DATATYPE_INTEGER:
                 case DATATYPE_SHORT:
                         factor = (PcvHeight)strtoul(string, NULL, 10);
                         break;
-                case DATATYPE_INTEGER:
-                        factor = (PcvHeight)strtoul(string, NULL, 10);
-                        break;
-                case DATATYPE_FLOAT:
-                        factor = (PcvHeight)strtoul(string, NULL, 10);
+                case DATATYPE_EPOCH:
+                        factor = (PcvHeight)strtoull(string, NULL, 10);
                         break;
                 case DATATYPE_STRING:
                         while (*string++) {

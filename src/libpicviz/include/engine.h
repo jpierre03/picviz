@@ -25,12 +25,16 @@ enum position_t {
 } position_t;
 
 typedef struct engine_t {
+        /* Private members: not recommended to change this at all! */
+        char __axis_label_exists; /* Defines wether we have labels in our axis or not */
+        char __header_title_exists; /* Defines wether we have title in our graph */
+
         unsigned int axis_default_thickness;
         unsigned int axis_x_cursor; /* We move where the X pos of the axis must be put everytime we add one */
         unsigned int axis_default_space;
-        int __axis_label_exists; /* To set this value in the parser to avoid setting the value browsing twice the list in the rendering engine: Not recommended to change this at all */
         enum position_t zero_position;
         int display_raw_data;
+
 } engine_t;
 
 

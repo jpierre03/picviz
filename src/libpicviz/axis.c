@@ -143,6 +143,10 @@ void picviz_axis_set_type_from_string(struct axis_t *axis, char *string)
                 axis->type = DATATYPE_GOLD;
                 return;
         }
+        if (!strcmp(string, "epoch")) {
+                axis->type = DATATYPE_EPOCH;
+                return;
+        }
 
         axis->type = DATATYPE_EMPTY;
 }

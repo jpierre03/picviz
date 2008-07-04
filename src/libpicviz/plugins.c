@@ -19,11 +19,9 @@
 #include <string.h>
 #include <math.h>
 
-#include "linuxlist.h"
-
-#include "utils.h"
-
-#include "plugins.h"
+#include <debug.h>
+#include <linuxlist.h>
+#include <plugins.h>
 
 #define FONT_SIZE_PER_CHAR 4
 
@@ -86,3 +84,28 @@ void image_to_svg(pcimage_t *i)
         printf("</svg>\n");
 }
 
+int picviz_plugin_find(const char *name)
+{
+        return 1;
+}
+
+
+/* Every plugin call this function to register themselves */
+void picviz_plugin_register(struct picviz_plugin_t *pp)
+{
+
+        if (strcmp(pp->api_version, PICVIZ_OUTPUT_API_VERSION)) {
+                picviz_debug(PICVIZ_DEBUG_CRITICAL, PICVIZ_AREA_PLUGIN,
+                             "Incompatible version '%s' for plugin. Needed '%s'",
+                             pp->api_version, PICVIZ_OUTPUT_API_VERSION);
+        }
+        if (picviz_plugin_find(pp->name)) {
+                picviz_debug(PICVIZ_DEBUG_WARNING, PICVIZ_AREA_PLUGIN,
+                             "Plugin '%s' already registered", pp->name);
+        } else {
+                picviz_debug(PICVIZ_DEBUG_NOTICE, PICVIZ_AREA_PLUGIN,
+                             "Registering plugin '%s'", pp->name);
+                //llist_add(&pp->list, &picviz_plugins);
+        }
+
+}

@@ -1,7 +1,7 @@
 YACC=bison
 LEX=flex
 CC=gcc
-CFLAGS=-D_UNIT_TEST_ -g -I../ -I../include
+CFLAGS=-D_UNIT_TEST_ -g -I../ -I../include -DDEBUGS
 LIBS=-lfl -ly -lpicviz
 
 all: parser

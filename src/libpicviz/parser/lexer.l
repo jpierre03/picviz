@@ -41,7 +41,7 @@ static char *escape_str(char *str)
 SECTION		(header|engine|axes|data)
 OPEN_SECTION    \{
 CLOSE_SECTION   \}
-DATATYPE	(timeline|integer|float|string|short|ipv4|gold|char)
+DATATYPE	(timeline|integer|float|string|short|ipv4|gold|char|epoch)
 OPEN_PROP	\[
 CLOSE_PROP	\]
 PROPERTY        (label|color)

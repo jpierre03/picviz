@@ -24,7 +24,7 @@
  */
 #define STRING_TYPE_MAX "The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague."
 /* Same value but calculated using values-mapping (_UNIT_TEST_) */
-#define STRING_TYPE_MAX_YVAL 16105
+#define STRING_TYPE_MAX_YVAL 16105.00
 
 #define EMPTY_TYPE_MAX_YVAL 1 /* Will make disorder and help folks writting better pcv file */
 
@@ -35,7 +35,9 @@
 
 #define TIMELINE_TYPE_MAX_YVAL 86399 /* 23:59 in seconds */
 #define GOLDNUMBER_TYPE_MAX_YVAL 1433
-#define IPV4_TYPE_MAX_YVAL 4294967295
+#define IPV4_TYPE_MAX_YVAL 4294967295 /* -> 11111111 11111111 11111111 11111111 */
+
+#define EPOCH_TYPE_MAX_YVAL IPV4_TYPE_MAX_YVAL
 
 PcvHeight picviz_variable_max(datatype_t vartype);
 

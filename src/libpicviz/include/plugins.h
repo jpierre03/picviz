@@ -18,8 +18,29 @@
 #ifndef _PLUGINS_H_
 #define _PLUGINS_H_
 
-//#include <picviz.h>
 #include "pcimage.h"
+
+#define PICVIZ_OUTPUT_API_VERSION "1"
+
+typedef enum plugin_type {
+        UNKNOWN,
+        OUTPUT,
+        RENDER
+} plugin_type;
+
+typedef struct picviz_plugin_t {
+        struct llist_head list;
+
+        unsigned int id;
+        char *name;
+        char *api_version;
+
+        enum plugin_type type;
+
+        int (*subscribe)(void);
+        void (*unsubscribe)(void);
+
+} picviz_plugin_t;
 
 void image_to_svg(struct pcimage_t *image);
 
