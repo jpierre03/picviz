@@ -17,6 +17,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <dlfcn.h>
+
 #include <math.h>
 
 #include <debug.h>
@@ -89,6 +92,27 @@ int picviz_plugin_find(const char *name)
         return 1;
 }
 
+void picviz_plugin_load(char *plugin_name)
+{
+	char *plugin_path;
+	char *plugin_full;
+	void *dlh;
+
+	plugin_path = getenv("PICVIZ_PLUGINS_PATH");
+	if (!plugin_path)
+		plugin_path = ".";
+
+	sprintf(plugin_full, "%s/%s", plugin_path, plugin_name);
+
+	dlh = dlopen(plugin_full, RTLD_LAZY);
+	if ( ! dlh ) {
+		fprintf(stderr, "Cannot open plugin: %s\n", dlerror());
+		exit(EXIT_FAILURE);
+	}
+
+	dlerror();    /* Clear any existing error */
+
+}
 
 /* Every plugin call this function to register themselves */
 void picviz_plugin_register(struct picviz_plugin_t *pp)

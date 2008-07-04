@@ -15,13 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _TYPES_H_
-#define _TYPES_H_
+#include <stdio.h>
+#include <stdarg.h>
+#include <time.h>
 
-typedef long long PcvHeight;
-typedef unsigned int PcvWidth;
-typedef unsigned int PcvID;
-typedef char *       PcvString;
+#include <debug.h>
 
-#endif /* _TYPE_H_ */
+void picviz_debug(int level, int area, const char *format, ...)
+{
+
+        char *timestr;
+        va_list ap;
+        time_t tm;
+        FILE *fd = stderr;
+
+        if (level == PICVIZ_DEBUG_NOTICE) {
+                fd = stdout;
+        }
+
+        va_start(ap, format);
+
+        tm = time(NULL);
+        timestr = ctime(&tm);
+        timestr[strlen(timestr)-1] = '\0';
+        fprintf(fd, "%s <%1.1d> ", timestr, level, area);
+        vfprintf(fd, format, ap);
+        va_end(ap);
+        fprintf(fd, "\n");
+
+        fflush(fd);
+
+}
 
