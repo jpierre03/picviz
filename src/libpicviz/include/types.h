@@ -18,7 +18,7 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-typedef long long PcvHeight;
+typedef unsigned long PcvHeight;
 typedef unsigned int PcvWidth;
 typedef unsigned int PcvID;
 typedef char *       PcvString;

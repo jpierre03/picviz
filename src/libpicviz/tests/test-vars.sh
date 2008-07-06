@@ -11,7 +11,7 @@ function run_check()
         file_check=$1
 
         echo "Run check with $file_check..."
-        $PCV $file_check.pcv > $TMP_DIR/$file_check.svg
+        $PCV -Tsvg $file_check.pcv > $TMP_DIR/$file_check.svg
         diff -Nudb $REG_PATH/$REG_VER/$file_check.svg $TMP_DIR/$file_check.svg > $TMP_DIR/$file_check.diff
 
         if [ -s $TMP_DIR/$file_check.diff ]

@@ -91,6 +91,7 @@ void picviz_image_debug_printall(struct pcimage_t *i)
 
         printf("i->width=%d\n", i->width);
         printf("i->height=%d\n", i->height);
+        printf("i->header_height=%d\n", i->header_height);
         printf("i->zero_pos=%d\n", i->zero_pos);
         llist_for_each_entry(a, &i->axes->list, list) {
                 printf("    a->id=%d\n", a->id);

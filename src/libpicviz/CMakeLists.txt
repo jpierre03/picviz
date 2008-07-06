@@ -1,3 +1,5 @@
+add_subdirectory(plugins)
+
 include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include ${picviz_SOURCE_DIR}/src/libpicviz/parser ${picviz_SOURCE_DIR}/src/libpicviz/props)
 
 #set(CMAKE_SHARED_LINKER_FLAGS "-lm -lfl -ly")

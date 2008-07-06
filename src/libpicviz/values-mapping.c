@@ -166,14 +166,22 @@ PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight ma
 #ifdef _UNIT_TEST_
 #include <stdio.h>
 
+void run_test(char *val)
+{
+	printf("Value=%s -> Int=%u\n", val, ipstr2i(val));
+}
+
 int main(void)
 {
         PcvHeight f;
         int i;
 
         f = picviz_line_value_get_from_string_dummy(DATATYPE_STRING, STRING_TYPE_MAX);
-        i = ipstr2i("192.168.0.12");
-        printf("i=%d\n", i);
+
+	run_test("192.168.0.42");
+	run_test("127.0.0.1");
+	run_test("0.0.0.0");
+	run_test("255.255.255.255");
 
         return 0;
 }

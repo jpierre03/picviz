@@ -44,5 +44,7 @@ typedef struct picviz_plugin_t {
 
 void image_to_svg(struct pcimage_t *image);
 
+void picviz_plugin_load(char *plugin_name, struct pcimage_t *image);
+
 #endif /* _PLUGINS_H_ */
 
