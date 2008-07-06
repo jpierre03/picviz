@@ -74,13 +74,13 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 56 "/home/toady/local/scm/svn/picviz/trunk/src/libpicviz/parser/parser.y"
+#line 56 "/home/toady/local/tmp/picviz/trunk/src/libpicviz/parser/parser.y"
 {
         char *string;
         int   number;
 }
 /* Line 1489 of yacc.c.  */
-#line 84 "/home/toady/local/scm/svn/picviz/trunk/src/libpicviz/parser/parser.h"
+#line 84 "/home/toady/local/tmp/picviz/trunk/src/libpicviz/parser/parser.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

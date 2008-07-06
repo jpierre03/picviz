@@ -11,6 +11,7 @@ int main(int argv, char **argc)
 
         if ((argv < 3) || ( ! strcmp(argc[1], "--help") )) {
                 fprintf(stderr, "Syntax: %s -Tplugin file.pcv [-debug|-render|-raw]\n",argc[0]);
+		fprintf(stderr, "\n  Example: %s -Tsvg file.pcv -raw > out.svg\n\n", argc[0]);
                 exit(1);
         }
 
