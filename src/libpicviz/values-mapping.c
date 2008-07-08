@@ -99,6 +99,7 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
         size_t strsize;
         char *hour;
         char *min;
+	char *sec;
 
 
         switch (type) {
@@ -120,6 +121,24 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
                         break;
                 case DATATYPE_TIMELINE:
                         strsize = strlen(string);
+                        if (strsize == 8) { /* 10:42:22 */
+                                hour = malloc(3);
+                                min  = malloc(3);
+				sec  = malloc(3);
+
+                                strncpy(hour, string, 2);
+                                hour[2] = '\0';
+                                strncpy(min, string + 3, 2);
+                                min[2] = '\0';
+                                strncpy(sec, string + 3, 2);
+                                min[2] = '\0';
+
+                                factor = (PcvHeight)((atoi(hour) * 60) * 60) + (atoi(min) * 60) + atoi(sec);
+
+                                free(hour);
+                                free(min);
+				free(sec);
+                        }
                         if (strsize == 5) { /* 10:42 */
                                 hour = malloc(3);
                                 min  = malloc(3);
@@ -157,7 +176,7 @@ PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight ma
 
         value = (float)(image->height - image->header_height) / max_val;
 
-        value *= y;
+	value *= y;
 
         return (PcvHeight)value;
 

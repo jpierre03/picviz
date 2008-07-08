@@ -35,8 +35,9 @@ struct pcimage_t *picviz_image_new(void)
         }
         pcimage->height        = DEFAULT_IMAGE_HEIGHT;
         pcimage->header_height = DEFAULT_IMAGE_HEADER_HEIGHT;
-        pcimage->width         = 0;
+	pcimage->width         = 0;
         pcimage->zero_pos      = TOP;
+	pcimage->bg_color      = "";
         pcimage->axes          = (struct axis_t *)picviz_axis_new();
         pcimage->lines         = (struct line_t *)picviz_line_new();
 
@@ -93,6 +94,7 @@ void picviz_image_debug_printall(struct pcimage_t *i)
         printf("i->height=%d\n", i->height);
         printf("i->header_height=%d\n", i->header_height);
         printf("i->zero_pos=%d\n", i->zero_pos);
+        printf("i->bg_color=%s\n", i->bg_color);
         llist_for_each_entry(a, &i->axes->list, list) {
                 printf("    a->id=%d\n", a->id);
                 printf("    a->label=%s\n", a->props->label);

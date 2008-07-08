@@ -73,6 +73,7 @@ typedef struct pcimage_t {
         PcvWidth  width;
         PcvHeight height;
         PcvHeight header_height;
+	PcvString bg_color;
 
         enum position_t zero_pos; /* where the zero value is on the axes */
 

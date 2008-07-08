@@ -225,6 +225,11 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
                                 engine.axis_default_space = atoi($3);
                         }
                 }
+	//	else if ( section_state == HEADER ) {
+	//		if ( ! strcmp($1, "bgcolor") ) {
+	//			image->bg_color = strdup($3);
+	//		}
+	//	}
 
                 free($3);
                 free($1);
