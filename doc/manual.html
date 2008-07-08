@@ -20,6 +20,9 @@ it is positioned accordingly.
 Since Picviz is focused on computer security data analysis, its default types are time, ip address, string or various
 kind of numbers.
 </p>
+<div align="center">
+<img src="picviz-arch.jpeg"/>
+</div>
 <h2>The PCV language</h2>
 <p>
 The PCV language goal is to remain as simple as possible to map your values on your axes. It is made of at least two
@@ -148,7 +151,7 @@ data {
 </pre>
 Then, using the <b>pcv</b> program like this:
 <pre>
-$ pcv ex1.pcv &gt; ex1.svg
+$ pcv -Tsvg ex1.pcv &gt; ex1.svg
 </pre>
 And it should look like this:
 <div align="center">
