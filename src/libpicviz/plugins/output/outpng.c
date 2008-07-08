@@ -26,19 +26,6 @@
 #include <plplot.h>
 
 
-#if 0
-PLFLT max_get(PLFLT *a)
-{
-	int k;
-	PLFLT max = 0;
-	for (k=0;k<N;k++) {
-		if (max < a[k])
-			max = a[k];
-	}
-	return max;
-}
-#endif
-
 void output(pcimage_t *i)
 {
         struct axis_t *a;
@@ -48,7 +35,8 @@ void output(pcimage_t *i)
         PcvWidth  last_x = -1;
         PcvHeight last_y = -1;
 
-	PLFLT plx[3], ply[3];
+	PLFLT plx[PICVIZ_MAX_AXES], ply[PICVIZ_MAX_AXES];
+
 	unsigned long n = 0;
 	unsigned long an, ln;
 	unsigned int apos = 0;
@@ -62,6 +50,7 @@ void output(pcimage_t *i)
         llist_for_each_entry(a, &i->axes->list, list) {
 		n++;
         }
+
 
 	plenv(0, n-1, 0, i->height, 0, -2);
 	plcol0(9); // Lines in blue
@@ -77,9 +66,7 @@ void output(pcimage_t *i)
 		axisn=0;
 
                 llist_for_each_entry(axisplot, &l->axisplot->list, list) {
-
 			plx[apos] = axisn;
-			printf("y=%d\n",axisplot->y);
 			ply[apos] = axisplot->y;
 
 			apos++;

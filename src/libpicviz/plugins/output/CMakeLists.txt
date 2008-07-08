@@ -1,5 +1,5 @@
-#include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include)
-include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include /usr/include/plplot)
+include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include)
+#include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include /usr/include/plplot)
 link_directories(${picviz_SOURCE_DIR}/src/libpicviz/)
 add_library(picvizoutsvg SHARED outsvg.c)
 #add_library(picvizoutpng SHARED outpng.c)

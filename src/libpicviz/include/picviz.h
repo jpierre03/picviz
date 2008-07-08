@@ -18,7 +18,7 @@
 #ifndef _PICVIZ_H_
 #define _PICVIZ_H_
 
-#define PICVIZ_MAX_AXES 512
+#define PICVIZ_MAX_AXES 1024
 
 #include "axis.h"
 #include "common.h"
