@@ -58,6 +58,11 @@ char *axis_label = "";
         int   number;
 }
 
+%type <string> property
+%type <string> properties
+%type <string> value
+%type <string> dataval
+
 %start pcv
 
 %%
@@ -102,7 +107,8 @@ section_new:    TOK_SECTION TOK_OPEN_SECTION
                 }
                 ;
 
-property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
+property:
+		TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
                 {
 #ifdef DEBUGSR
         printf("==> property:       TOK_PROPERTY(%s) TOK_EQUAL TOK_DQSTRING(%s)\n", $1, $3);
@@ -131,14 +137,18 @@ property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING
         printf("<== property:       TOK_PROPERTY TOK_EQUAL TOK_DQSTRING\n");
 #endif /* DEBUGSR */
                 }
-                |
-                property TOK_COMMA property
-                {
-#ifdef DEBUGSR
-        printf("==> dataval TOK_SEMICOLON\n");
-#endif /* DEBUGSR */
-                }
                 ;
+
+properties:
+	property
+	{
+		$$ = $1;
+	}
+	|
+	property TOK_COMMA properties
+	{
+		$$ = $1;
+	}
 
 type_var:	TOK_DATATYPE TOK_WORD
 		{
@@ -164,7 +174,7 @@ type_var:	TOK_DATATYPE TOK_WORD
         printf("<== type_var:	TOK_DATATYPE TOK_WORD\n");
 #endif /* DEBUGSR */
 		}
-		| TOK_DATATYPE TOK_WORD TOK_OPEN_PROP property TOK_CLOSE_PROP
+		| TOK_DATATYPE TOK_WORD TOK_OPEN_PROP properties TOK_CLOSE_PROP
 		{
 #ifdef DEBUGSR
         printf("==> type_var:    TOK_DATATYPE(%s) TOK_WORD(%s) TOK_OPEN_PROP property TOK_CLOSE_PROP\n", $1, $2);
@@ -193,7 +203,7 @@ type_var:	TOK_DATATYPE TOK_WORD
                 ;
 
 /* l="foo",p="bar" */
-dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
+value: TOK_WORD TOK_EQUAL TOK_DQSTRING
         {
 #ifdef DEBUGSR
         printf("==> dataval: TOK_WORD(%s) TOK_EQUAL TOK_DQSTRING(%s)\n", $1, $3);
@@ -238,8 +248,17 @@ dataval: TOK_WORD TOK_EQUAL TOK_DQSTRING
 #endif /* DEBUGSR */
 
         }
+	;
+
+dataval: value
+	{
+		$$ = $1;
+	}
         |
-        dataval TOK_COMMA dataval
+        value TOK_COMMA dataval
+	{
+		$$ = $1;
+	}
         ;
 
 key_value_data: dataval TOK_OPEN_PROP property TOK_CLOSE_PROP TOK_SEMICOLON
