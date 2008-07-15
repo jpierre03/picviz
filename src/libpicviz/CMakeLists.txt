@@ -1,4 +1,4 @@
-add_subdirectory(plugins)
+add_subdirectory(plugins bindings)
 
 include_directories(${picviz_SOURCE_DIR}/src/libpicviz/include ${picviz_SOURCE_DIR}/src/libpicviz/parser ${picviz_SOURCE_DIR}/src/libpicviz/props)
 
