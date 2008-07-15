@@ -95,7 +95,7 @@ Every axis my be declared with a type, which can be:
         <td>float</td><td>0.00 - 65534.99</td><td>Floating number</td>
         </tr>
         <tr align="center">
-        <td>string</td><td>"" - "The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague."</td><td>A string value</td>
+        <td>string</td><td>"" - "The competent programmer is fully aware of the limited size of his\\ own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague."</td><td>A string value</td>
         </tr>
         <tr align="center">
         <td>short</td><td>0 - 32767</td><td>Short number</td>
@@ -119,7 +119,7 @@ Every axis my be declared with a type, which can be:
 <p>
 The data section positionates values on the axes. Its syntax is:
 <pre>
-   axis1="value", axis2="value, ... [prop1="val", prop2="val"];
+
 </pre>
 The value must fit the axis type. And the properties are applied on the whole line. If we deal with a string,
 we map the string value with our special string: "<i>The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague.</i>". This is a special

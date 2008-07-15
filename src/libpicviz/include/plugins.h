@@ -20,6 +20,10 @@
 
 #include "pcimage.h"
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define PICVIZ_OUTPUT_API_VERSION "1"
 
 typedef enum plugin_type {
@@ -45,6 +49,10 @@ typedef struct picviz_plugin_t {
 void image_to_svg(struct pcimage_t *image);
 
 void picviz_plugin_load(char *plugin_name, struct pcimage_t *image);
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _PLUGINS_H_ */
 

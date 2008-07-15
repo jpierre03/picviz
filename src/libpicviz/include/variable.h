@@ -18,6 +18,10 @@
 #ifndef _VARIABLE_H_
 #define _VARIABLE_H_
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* The string we use as reference to put our variables on its type.
  * If the string we deal with is bigger than this one, it will then become
  * the reference for the rest of the graph.
@@ -40,6 +44,10 @@
 #define EPOCH_TYPE_MAX_YVAL IPV4_TYPE_MAX_YVAL
 
 PcvHeight picviz_variable_max(datatype_t vartype);
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _VARIABLE_H_ */
 

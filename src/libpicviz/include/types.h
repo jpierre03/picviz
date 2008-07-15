@@ -18,10 +18,18 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 typedef unsigned long PcvHeight;
 typedef unsigned int PcvWidth;
 typedef unsigned int PcvID;
 typedef char *       PcvString;
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _TYPE_H_ */
 

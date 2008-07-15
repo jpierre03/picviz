@@ -18,6 +18,10 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 enum position_t {
         TOP,
         MIDDLE,
@@ -39,5 +43,9 @@ typedef struct engine_t {
 
 
 extern struct engine_t engine;
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _ENGINE_H_ */

@@ -15,6 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define DEFAULT_IMAGE_HEIGHT 500
 #define DEFAULT_IMAGE_HEADER_HEIGHT 15
 
+#ifdef __cplusplus
+ }
+#endif

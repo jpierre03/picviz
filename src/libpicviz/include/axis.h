@@ -21,6 +21,10 @@
 #include "pcimage.h"
 //#include <picviz.h>
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 struct axis_properties_t *picviz_axis_properties_new(void);
 struct axis_t *picviz_axis_init(void);
 void picviz_axis_destroy(struct pcimage_t *image);
@@ -28,6 +32,10 @@ struct axis_t *picviz_axis_new(void);
 void picviz_axis_set_type_from_string(struct axis_t *axis, char *string);
 void picviz_axis_set_label(struct axis_t *axis, char *label);
 struct axisplot_t *picviz_axisplot_new(void);
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif
 

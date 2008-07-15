@@ -20,10 +20,18 @@
 
 #include "pcimage.h"
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 struct pcimage_t *picviz_image_new(void);
 void picviz_image_destroy(struct pcimage_t *image);
 void picviz_init(void);
 void picviz_image_axis_append(struct pcimage_t *i, struct axis_t *axis);
 void picviz_image_line_append(struct pcimage_t *image, struct line_t *line);
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _IMAGE_H_ */

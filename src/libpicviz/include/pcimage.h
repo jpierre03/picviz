@@ -22,6 +22,10 @@
 #include "engine.h"
 #include "types.h"
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 typedef enum datatype_t {
         DATATYPE_EMPTY,
         DATATYPE_INTEGER,
@@ -81,6 +85,10 @@ typedef struct pcimage_t {
         struct line_t *lines;
 
 } pcimage_t;
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _PCIMAGE_H_ */
 

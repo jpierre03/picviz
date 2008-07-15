@@ -18,6 +18,10 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define TRUE 1
 #define FALSE 0
 
@@ -33,6 +37,10 @@
 #define MIN	* 60 SEC
 #define HOUR	* 60 MIN
 #define DAY	* 24 HOUR
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif
 

@@ -15,5 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define picviz_property_set(prop,key,val)       \
   prop->key = val;
+
+#ifdef __cplusplus
+ }
+#endif

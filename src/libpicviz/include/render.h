@@ -20,6 +20,14 @@
 
 #include <pcimage.h>
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 void picviz_render_image(pcimage_t *image);
+
+#ifdef __cplusplus
+ }
+#endif
 
 #endif /* _RENDER_H_ */

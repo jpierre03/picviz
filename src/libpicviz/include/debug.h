@@ -15,6 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define PICVIZ_DEBUG_NOTICE   0x0001
 #define PICVIZ_DEBUG_WARNING  0x0002
 #define PICVIZ_DEBUG_CRITICAL 0x0003
@@ -25,3 +29,6 @@
 
 void picviz_debug(int level, int area, const char *format, ...);
 
+#ifdef __cplusplus
+ }
+#endif

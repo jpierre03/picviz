@@ -3,6 +3,10 @@
 
 #include <stddef.h>
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #ifndef inline
 #define inline __inline__
 #endif
@@ -356,5 +360,8 @@ static inline void llist_splice_init(struct llist_head *llist,
 	for ((pos) = (pos)->next, prefetch((pos)->next); (pos) != (head); \
 		(pos) = (pos)->next, ({ smp_read_barrier_depends(); 0;}), prefetch((pos)->next))
 
+#ifdef __cplusplus
+ }
+#endif
 
 #endif
