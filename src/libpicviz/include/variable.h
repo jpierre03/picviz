@@ -18,6 +18,9 @@
 #ifndef _VARIABLE_H_
 #define _VARIABLE_H_
 
+//#include <picviz.h>
+#include <types.h>
+
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -43,7 +46,8 @@
 
 #define EPOCH_TYPE_MAX_YVAL IPV4_TYPE_MAX_YVAL
 
-PcvHeight picviz_variable_max(datatype_t vartype);
+//PcvHeight picviz_variable_max(datatype_t vartype);
+PcvHeight picviz_variable_max(int vartype);
 
 #ifdef __cplusplus
  }
