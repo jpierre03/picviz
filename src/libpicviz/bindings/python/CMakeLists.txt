@@ -20,7 +20,8 @@ SWIG_LINK_LIBRARIES(picviz ${PYTHON_LIBRARIES})
 install(
 TARGETS _picviz
 LIBRARY
-DESTINATION ${PYTHON_INSTDIR}
+#DESTINATION ${PYTHON_INSTDIR}
+DESTINATION /usr/local/lib/python2.5/site-packages
 )
 
 set(PERM_SCRIPTS
@@ -34,7 +35,8 @@ WORLD_EXECUTE
 )
 install(
 FILES ${CMAKE_CURRENT_BINARY_DIR}/plplot.py
-DESTINATION ${PYTHON_INSTDIR}
+DESTINATION /usr/local/lib/python2.5/site-packages
+#DESTINATION ${PYTHON_INSTDIR}
 )
 
 endif(ENABLE_python)
