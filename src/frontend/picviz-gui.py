@@ -9,7 +9,6 @@
 import os
 import sys
 import time
-import sre
 
 from PyQt4 import QtCore, QtGui
 
@@ -28,8 +27,6 @@ line4_text = "alert.classification.text"
 line4_x = 620
 line5_text = "alert.assessment.impact.description"
 line5_x = 780
-
-mode = "polling"
 
 def draw_default_layout(scene):
 	for item in scene.items():
