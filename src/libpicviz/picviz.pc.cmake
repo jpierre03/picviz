@@ -1,5 +1,7 @@
-libdir=@SHLIB_DIR@
-includedir=@INCLUDE_DIR@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix="${prefix}"
+includedir="${prefix}/include/picviz"
+libdir="${exec_prefix}/lib"
 
 Name: Picviz
 Description: Parallel Coordinates Plot Library
