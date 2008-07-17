@@ -5,14 +5,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1231</width>
-    <height>792</height>
+    <width>1047</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Prelude IDMEF Grapher</string>
+   <string>Picviz Frontend</string>
   </property>
   <widget class="QWidget" name="centralwidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>23</y>
+     <width>1047</width>
+     <height>704</height>
+    </rect>
+   </property>
    <layout class="QVBoxLayout" >
     <item>
      <layout class="QHBoxLayout" >
@@ -63,8 +71,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1231</width>
-     <height>26</height>
+     <width>1047</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File" >
@@ -84,7 +92,16 @@
    <addaction name="menu_File" />
    <addaction name="menu_Help" />
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
+  <widget class="QStatusBar" name="statusbar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>727</y>
+     <width>1047</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
   <action name="actionConnect_to_manager" >
    <property name="text" >
     <string>&amp;Connect to manager...</string>
