@@ -2,15 +2,18 @@
 
 CC="gcc"
 CFLAGS="-D_UNIT_TEST_ -I./include"
-
+LIBS="-lpicviz"
 
 function compile()
 {
         base=$1
+	addflags=$2
+	CFLAGS="$CFLAGS $addflags"
 
         echo "Compiling $base..."
-        $CC $base.c -o $base $CFLAGS
+        $CC $base.c -o $base $CFLAGS $LIBS
 }
 
 compile values-mapping
+compile fifo-read -levent
 

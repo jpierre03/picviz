@@ -18,17 +18,26 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include <ev.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 #include <picviz.h>
 
+
+const char *spath = "/tmp/.pcvd-queue.fd";
+
 #define BUFSIZE 1024
+#define PCVD_QUEUE_MAX 32
 
 int unix_server_create(void)
 {
-	const char *spath = "/tmp/pcvd-queue.fd";
 
 	struct sockaddr_un local;
 
@@ -60,30 +69,69 @@ int unix_server_create(void)
 
 	setsockopt(sockfd, SOL_SOCKET, SO_RCVBUF, &buflen, optlen);
 
+
 	return sockfd;
 }
+
+// all watcher callbacks have a similar signature
+// this callback is called when data is readable on stdin
+static void
+stdin_cb (EV_P_ struct ev_io *w, int revents)
+{
+	puts ("stdin ready");
+	// for one-shot events, one must manually stop the watcher
+	// with its corresponding stop function.
+	ev_io_stop (EV_A_ w);
+
+	// this causes all nested ev_loop's to stop iterating
+	ev_unloop (EV_A_ EVUNLOOP_ALL);
+}
+
+
 
 int main(int argc, char **argv)
 {
 	struct pcimage_t *image;
 	int sockfd;
+#if 0
 	ssize_t nread;
 	char buf[BUFSIZE];
+	struct sockaddr_un from;
 	socklen_t fromlen;
+#endif
+	ev_io queue_watcher;
+	struct ev_loop *loop = ev_default_loop (0);
+
 
 	fprintf(stdout, "Picviz Daemon - (C) Sebastien Tricaud 2008\n");
 	fprintf(stdout, "[+] Starting\n");
 	image = picviz_image_new();
 
-	sockfd = unix_server_create();
+
+	//sockfd = unix_server_create();
+	sockfd = open(spath, O_RDONLY | O_NONBLOCK, 0);
+	ev_io_init (&queue_watcher, stdin_cb, sockfd, EV_READ);
+	ev_io_start (loop, &queue_watcher);
+
+	ev_loop (loop, 0);
+
+	close(sockfd);
+#if 0
+	fromlen = sizeof(from);
 
 	while (1) {
-		nread = recvfrom(sockfd, buf, BUFSIZE, MSG_DONTWAIT, NULL, &fromlen);
+		nread = recvfrom(sockfd, buf, BUFSIZE, 0, (struct sockaddr *)&from, &fromlen);
 		if ( nread >= 0 ) {
 			printf("We received data\n");
 		}
+		printf(".");
+		sleep(1);
 	}
 
+
+	unlink(spath);
+	close(sockfd);
+#endif
 	picviz_image_destroy(image);
 
 	return 0;

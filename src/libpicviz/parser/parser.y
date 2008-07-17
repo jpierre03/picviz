@@ -31,6 +31,13 @@ int i = 0;
 char *line_color;
 char *axis_label = "";
 
+/* I know this is ugly,
+ * I'll get back to it latter
+ */
+#define FILE_MODE 0
+#define LINE_MODE 1
+char FILE_OR_LINE = FILE_MODE;
+
 #define YY_ABORT return -1;
 #define YYERROR_VERBOSE
 
@@ -269,7 +276,9 @@ key_value_data: dataval TOK_OPEN_PROP property TOK_CLOSE_PROP TOK_SEMICOLON
                         if ( section_state == DATA ) {
                                 picviz_line_prop_color_set(line, line_color);
                                 free(line_color);
-                                picviz_image_line_append(image, line);
+				if (FILE_OR_LINE == FILE_MODE) {
+                                	picviz_image_line_append(image, line);
+				}
                         }
 #if 0
 #ifdef DEBUGAXES
@@ -301,7 +310,9 @@ key_value_data: dataval TOK_OPEN_PROP property TOK_CLOSE_PROP TOK_SEMICOLON
 
 
                         if ( section_state == DATA ) {
-                                picviz_image_line_append(image, line);
+				if (FILE_OR_LINE == FILE_MODE) {
+                                	picviz_image_line_append(image, line);
+				}
                         }
                         //for (i=0; i<(max_axes-1);i++) {
                         //}
@@ -357,6 +368,22 @@ struct pcimage_t *pcv_parse(char *filename)
         return image;
         //image_to_svg(image);
         //picviz_image_debug_printall(image);
+}
+
+struct line_t *picviz_parse_line(char *string)
+{
+	void *state;
+	int ret;
+
+//	memset(line, 0, sizeof(struct line_t *));
+	FILE_OR_LINE = LINE_MODE;
+
+	section_state = DATA;
+	state = yy_scan_string(string);
+	ret = yyparse();
+	yy_delete_buffer(state);
+
+	return line;
 }
 
 #ifdef _UNIT_TEST_

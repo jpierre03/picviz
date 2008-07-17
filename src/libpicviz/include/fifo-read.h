@@ -15,25 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _PICVIZ_H_
-#define _PICVIZ_H_
+#ifndef _FIFO_READ_H_
+#define _FIFO_READ_H_
 
-#define PICVIZ_MAX_AXES 1024
-#define PICVIZ_MAJOR_VERSION 0
-#define PICVIZ_MINOR_VERSION 1
 
-#include "axis.h"
-#include "common.h"
-#include "defaults.h"
-#include "engine.h"
-#include "image.h"
-#include "line.h"
-#include "pcimage.h"
-#include "plugins.h"
-#include "properties.h"
-#include "render.h"
-#include "types.h"
-#include "values-mapping.h"
-#include "variable.h"
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
-#endif /* _PICVIZ_H_ */
+int picviz_fifo_data_read(struct pcimage_t *image, char *filename);
+
+#ifdef __cplusplus
+ }
+#endif
+
+#endif /* _FIFO_READ_H_ */
+
