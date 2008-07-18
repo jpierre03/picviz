@@ -77,6 +77,7 @@ if __name__ == "__main__":
 	window = QtGui.QMainWindow()
 
 	ui.setupUi(window)
+        window.setWindowTitle("Picviz %s Frontend [%s]" % (picviz.Version(), pcvfile))
 
 	scene = QtGui.QGraphicsScene(ui.graphicsView)
 	ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
