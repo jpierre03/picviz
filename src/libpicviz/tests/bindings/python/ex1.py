@@ -8,12 +8,10 @@ dnb = 0
 
 print "Picviz Python API version: %s" % picviz.Version()
 print "Loading file '%s'" % filename
-data = picviz.ParseLines(filename)
-for i in data:
-	lnb = lnb + 1
-	for j in i:
-		dnb = dnb + 1
-	print "Data for line %d: %s" % (lnb, str(i))
+data = picviz.ParseImage(filename)
 
-print "There are %d lines." % lnb
+print "The image height is %d " % data['height']
+print "There are %d axes" % data['axes_number']
+for line in data['lines']:
+        print str(line[1]['y'])
 
