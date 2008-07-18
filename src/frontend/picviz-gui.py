@@ -33,8 +33,19 @@ class PicvizApp(QtGui.QWidget):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-def addLines(filename):
+#class LineItem(QtGui.QGraphicsItem):
+#	pen = QtGui.QPen()
+#
+#	def __init__(self):
+#		QtGui.QGraphicsItem.__init__(self)
+#		self.setToolTip("Test")
+#		self.pen.setColor(QtCore.Qt.black)
+#
+#	def setCoordinates(self, axis1, y1, axis2, y2):
+#		self.addLine(axis1, y1, axis2, y2, self.pen)
 
+
+def addLines(filename):
 	pen = QtGui.QPen()
 	pen.setColor(QtCore.Qt.black)
 
@@ -56,7 +67,9 @@ def addLines(filename):
 		plotnb = 0
 		for plot in line:
 			if plotnb != axisnb - 1:
-				scene.addLine(plotnb * axiswidth, 500 - line[plotnb], (plotnb + 1) * axiswidth, 500 - line[plotnb+1])
+				ptr = scene.addLine(plotnb * axiswidth, 500 - line[plotnb], (plotnb + 1) * axiswidth, 500 - line[plotnb+1])
+				ptr.setToolTip("%d -> %d\n____________________" % (line[plotnb], line[plotnb+1]))
+				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
 
 if __name__ == "__main__":
@@ -76,7 +89,6 @@ if __name__ == "__main__":
 	ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
 	ui.graphicsView.setScene(scene)
 	scene.setSceneRect(0, 0, 875, 500)
-
 
 	window.show()
 
