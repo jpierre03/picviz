@@ -23,43 +23,7 @@
    </property>
    <layout class="QVBoxLayout" >
     <item>
-     <layout class="QHBoxLayout" >
-      <item>
-       <widget class="QLineEdit" name="lineEdit1" >
-        <property name="text" >
-         <string>timeline</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit2" >
-        <property name="text" >
-         <string>alert.source(0).address.address</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit3" >
-        <property name="text" >
-         <string>alert.target(0).address.address</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit4" >
-        <property name="text" >
-         <string>alert.assessment.impact.severity</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit5" >
-        <property name="text" >
-         <string>alert.classification.text</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" />
     </item>
     <item>
      <widget class="QGraphicsView" name="graphicsView" />
