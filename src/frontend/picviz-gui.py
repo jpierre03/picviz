@@ -21,7 +21,7 @@ import picviz
 from ui_picviz import Ui_MainWindow
 
 
-axiswidth = 200
+axiswidth = 130
 
 ui = Ui_MainWindow()
 scene = QtGui.QGraphicsScene()
@@ -47,7 +47,7 @@ def addLines(filename):
 		for plot in line:
 			axisnb = axisnb + 1
 
-	i = 1
+	i = 0
 	while i <= axisnb:
 		scene.addLine(i * axiswidth, 0, i * axiswidth, 500, pen)
 		i = i + 1
@@ -55,9 +55,9 @@ def addLines(filename):
 	for line in data:
 		plotnb = 0
 		for plot in line:
-			plotnb = plotnb + 1
 			if plotnb != axisnb:
 				scene.addLine(plotnb * axiswidth, 500 - line[plotnb-1], (plotnb + 1) * axiswidth, 500 - line[plotnb])
+			plotnb = plotnb + 1
 
 if __name__ == "__main__":
 
