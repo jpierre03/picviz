@@ -49,26 +49,19 @@ def addLines(filename):
 	pen = QtGui.QPen()
 	pen.setColor(QtCore.Qt.black)
 
-	data = picviz.ParseLines(filename)
-
-	# Ugly crap to cheat python bindings, should write a AxisNumberGet() function latter
-	axisnb = 0
-	for line in data:
-		axisnb = 0
-		for plot in line:
-			axisnb = axisnb + 1
+	image = picviz.ParseImage(filename)
 
 	i = 0
-	while i < axisnb:
-		scene.addLine(i * axiswidth, 0, i * axiswidth, 500, pen)
+	while i < image['axes_number']:
+		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
-	for line in data:
+	for line in image['lines']:
 		plotnb = 0
 		for plot in line:
-			if plotnb != axisnb - 1:
-				ptr = scene.addLine(plotnb * axiswidth, 500 - line[plotnb], (plotnb + 1) * axiswidth, 500 - line[plotnb+1])
-				ptr.setToolTip("%d -> %d\n____________________" % (line[plotnb], line[plotnb+1]))
+			if plotnb != image['axes_number'] - 1:
+				ptr = scene.addLine(plotnb * axiswidth, image['height'] - line[plotnb]['y'], (plotnb + 1) * axiswidth, image['height'] - line[plotnb+1]['y'])
+				ptr.setToolTip("%s -> %s" % (line[plotnb]['strval'], line[plotnb+1]['strval']))
 				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
 
