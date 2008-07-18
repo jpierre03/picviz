@@ -17,6 +17,8 @@
 
 #include <Python.h>
 
+#include <stdio.h>
+
 #include <picviz.h>
 #include <linuxlist.h>
 
@@ -42,6 +44,10 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
 	PyArg_ParseTuple(args, "s", &filename);
 
 	image = (struct pcimage_t *)pcv_parse(filename);
+	if ( ! image ) {
+		fprintf(stderr, "Cannot create image");
+		Py_RETURN_NONE;
+	}
 
 	llist_for_each_entry(line, &image->lines->list, list) {
 		PyObject *axisplot_list = PyList_New(0);

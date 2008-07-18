@@ -375,7 +375,6 @@ struct line_t *picviz_parse_line(char *string)
 	void *state;
 	int ret;
 
-//	memset(line, 0, sizeof(struct line_t *));
 	FILE_OR_LINE = LINE_MODE;
 
 	section_state = DATA;
