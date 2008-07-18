@@ -21,7 +21,6 @@ import picviz
 from ui_picviz import Ui_MainWindow
 
 
-pcvfile = "../../samples/test2.pcv"
 axiswidth = 200
 
 ui = Ui_MainWindow()
@@ -61,6 +60,13 @@ def addLines(filename):
 				scene.addLine(plotnb * axiswidth, 500 - line[plotnb-1], (plotnb + 1) * axiswidth, 500 - line[plotnb])
 
 if __name__ == "__main__":
+
+	if len(sys.argv) < 2:
+		print "Syntax: %s file.pcv" % (sys.argv[0])
+		sys.exit(1)
+	else:
+		pcvfile = sys.argv[1]
+
 	app = QtGui.QApplication(sys.argv)
 	window = QtGui.QMainWindow()
 
