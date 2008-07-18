@@ -48,15 +48,15 @@ def addLines(filename):
 			axisnb = axisnb + 1
 
 	i = 0
-	while i <= axisnb:
+	while i < axisnb:
 		scene.addLine(i * axiswidth, 0, i * axiswidth, 500, pen)
 		i = i + 1
 
 	for line in data:
 		plotnb = 0
 		for plot in line:
-			if plotnb != axisnb:
-				scene.addLine(plotnb * axiswidth, 500 - line[plotnb-1], (plotnb + 1) * axiswidth, 500 - line[plotnb])
+			if plotnb != axisnb - 1:
+				scene.addLine(plotnb * axiswidth, 500 - line[plotnb], (plotnb + 1) * axiswidth, 500 - line[plotnb+1])
 			plotnb = plotnb + 1
 
 if __name__ == "__main__":
