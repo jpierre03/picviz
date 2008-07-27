@@ -82,7 +82,7 @@ if __name__ == "__main__":
 	scene = QtGui.QGraphicsScene(ui.graphicsView)
 	ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
 	ui.graphicsView.setScene(scene)
-	scene.setSceneRect(0, 0, 875, 500)
+	#scene.setSceneRect(0, 0, 875, 500)
 
 	window.show()
 
