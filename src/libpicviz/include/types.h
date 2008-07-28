@@ -23,9 +23,9 @@
 #endif
 
 typedef unsigned long PcvHeight;
-typedef unsigned int PcvWidth;
-typedef unsigned int PcvID;
-typedef char *       PcvString;
+typedef unsigned int  PcvWidth;
+typedef unsigned int  PcvID;
+typedef char *        PcvString;
 
 #ifdef __cplusplus
  }

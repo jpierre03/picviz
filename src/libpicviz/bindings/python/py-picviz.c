@@ -71,6 +71,8 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
         unsigned int ui = 0;
 
         PyObject *main_dict = PyDict_New();
+        PyObject *axeslist = PyList_New(0);
+        PyObject *axisdata = PyDict_New();
         PyObject *lineslist = PyList_New(0);
         PyObject *linedata = PyDict_New();
 
@@ -90,11 +92,22 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
 
         /* Set axes */
 	llist_for_each_entry(axis, &image->axes->list, list) {
+		ret = pypicviz_dict_keyval_append_long(axisdata, "id", axis->id);
+                if (ret < 0) {
+                        Py_RETURN_NONE;
+                }
+		ret = pypicviz_dict_keyval_append_str(axisdata, "label", axis->props->label);
+                if (ret < 0) {
+                        Py_RETURN_NONE;
+                }
                 ui++;
+		PyList_Append(axeslist, axisdata);
         }
         ret = pypicviz_dict_keyval_append_long(main_dict, "axes_number", ui);
         if (ret < 0)
                 Py_RETURN_NONE;
+
+        ret = PyDict_SetItemString(main_dict, "axes", axeslist);
 
         /* Set Lines plots and properties */
 	llist_for_each_entry(line, &image->lines->list, list) {

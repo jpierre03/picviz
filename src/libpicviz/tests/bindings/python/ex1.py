@@ -15,3 +15,6 @@ print "There are %d axes" % data['axes_number']
 for line in data['lines']:
         print str(line[1]['y'])
 
+print "Whole data structure:"
+print str(data)
+

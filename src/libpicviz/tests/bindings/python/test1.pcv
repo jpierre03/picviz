@@ -2,7 +2,7 @@ header {
     title = "Test 1";
 }
 axes {
-    timeline t;
+    timeline t [label="time"];
     char     i;
     string   a;
 }
