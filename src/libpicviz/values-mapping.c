@@ -60,6 +60,7 @@ u_int32_t ipstr2i(char *quad)
 	int x, y, z;
         u_int32_t i;
 
+	if ( ! strcmp(quad, "")) return 0;
 
 	//if (!validate_v4addr (quad))
 	//	return -1;
