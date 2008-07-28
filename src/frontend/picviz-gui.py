@@ -44,12 +44,12 @@ def addLines(filename):
 	while i < image['axes_number']:
 		comboboxes[i] = QtGui.QComboBox()
 		ui.horizontalLayout.addWidget(comboboxes[i])
-		print str(image['axes'])
 		for axis in image['axes']:
 			if axis['label']:
 				comboboxes[i].addItem(axis['label'])
 			else:
 				comboboxes[i].addItem("axis%d" % i)
+		comboboxes[i].setCurrentIndex(i)
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
