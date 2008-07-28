@@ -72,7 +72,6 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
 
         PyObject *main_dict = PyDict_New();
         PyObject *axeslist = PyList_New(0);
-        PyObject *axisdata = PyDict_New();
         PyObject *lineslist = PyList_New(0);
         PyObject *linedata = PyDict_New();
 
@@ -92,6 +91,7 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
 
         /* Set axes */
 	llist_for_each_entry(axis, &image->axes->list, list) {
+		PyObject *axisdata = PyDict_New();
 		ret = pypicviz_dict_keyval_append_long(axisdata, "id", axis->id);
                 if (ret < 0) {
                         Py_RETURN_NONE;
