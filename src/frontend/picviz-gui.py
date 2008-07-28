@@ -33,6 +33,29 @@ class PicvizApp(QtGui.QWidget):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+def ComboIndexChange(widget):
+	print "foo"
+
+class AxisName(QtGui.QWidget):
+	def __init__(self, axisid, parent = None):
+		QtGui.QWidget.__init__(self, parent)
+		self.combo = QtGui.QComboBox()
+		ui.horizontalLayout.addWidget(self.combo)
+		self.axisid = axisid
+		self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
+				self.indexChanged())
+
+	def setItemName(self, label):
+		if label:
+			self.combo.addItem(label)
+		else:
+			self.combo.addItem("axis%d" % self.axisid)
+
+	def indexChanged(self, i):
+		print "foo"
+
+	def setCurrentIndex(self, i):
+		self.combo.setCurrentIndex(i)
 
 def addLines(filename):
 	pen = QtGui.QPen()
@@ -42,14 +65,12 @@ def addLines(filename):
 
 	i = 0
 	while i < image['axes_number']:
-		comboboxes[i] = QtGui.QComboBox()
-		ui.horizontalLayout.addWidget(comboboxes[i])
+		combo = AxisName(i)
+		combo.show()
 		for axis in image['axes']:
-			if axis['label']:
-				comboboxes[i].addItem(axis['label'])
-			else:
-				comboboxes[i].addItem("axis%d" % i)
-		comboboxes[i].setCurrentIndex(i)
+			combo.setItemName(axis['label'])
+		combo.setCurrentIndex(i)
+
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
