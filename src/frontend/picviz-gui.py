@@ -25,24 +25,13 @@ axiswidth = 130
 
 ui = Ui_MainWindow()
 scene = QtGui.QGraphicsScene()
-
+comboboxes = {}
 
 class PicvizApp(QtGui.QWidget):
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-#class LineItem(QtGui.QGraphicsItem):
-#	pen = QtGui.QPen()
-#
-#	def __init__(self):
-#		QtGui.QGraphicsItem.__init__(self)
-#		self.setToolTip("Test")
-#		self.pen.setColor(QtCore.Qt.black)
-#
-#	def setCoordinates(self, axis1, y1, axis2, y2):
-#		self.addLine(axis1, y1, axis2, y2, self.pen)
 
 
 def addLines(filename):
@@ -53,6 +42,14 @@ def addLines(filename):
 
 	i = 0
 	while i < image['axes_number']:
+		comboboxes[i] = QtGui.QComboBox()
+		ui.horizontalLayout.addWidget(comboboxes[i])
+		print str(image['axes'])
+		for axis in image['axes']:
+			if axis['label']:
+				comboboxes[i].addItem(axis['label'])
+			else:
+				comboboxes[i].addItem("axis%d" % i)
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
@@ -64,6 +61,7 @@ def addLines(filename):
 				ptr.setToolTip("%s -> %s" % (line[plotnb]['strval'], line[plotnb+1]['strval']))
 				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
+
 
 if __name__ == "__main__":
 
