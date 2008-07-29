@@ -41,15 +41,14 @@ class AxisName(QtGui.QWidget):
 		QtGui.QWidget.__init__(self, parent)
 		self.combo = QtGui.QComboBox()
 		ui.horizontalLayout.addWidget(self.combo)
-		self.axisid = axisid
 		#self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
 		#		self.indexChanged())
 
-	def setItemName(self, label):
+	def setItemName(self, label, id):
 		if label:
 			self.combo.addItem(label)
 		else:
-			self.combo.addItem("axis%d" % self.axisid)
+			self.combo.addItem("axis%d" % id)
 
 	def indexChanged(self):
 		print "foo"
@@ -68,7 +67,7 @@ def addLines(filename):
 		combo = AxisName(i)
 		combo.show()
 		for axis in image['axes']:
-			combo.setItemName(axis['label'])
+			combo.setItemName(axis['label'],axis['id'])
 		combo.setCurrentIndex(i)
 
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
