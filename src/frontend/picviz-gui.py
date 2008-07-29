@@ -24,8 +24,27 @@ from ui_picviz import Ui_MainWindow
 axiswidth = 130
 
 ui = Ui_MainWindow()
+app = QtGui.QApplication(sys.argv)
+window = QtGui.QMainWindow()
 scene = QtGui.QGraphicsScene()
 comboboxes = {}
+image = 0
+
+
+#class Timeout:
+#	def __init__(self, last):
+#		self.last_timeout = last
+#
+#	def canActivate(self, time):
+#		if int(time) - self.last_timeout > 1:
+#			print "update: %d-%d" % (int(time),self.last_timeout)
+#		self.last_timeout = int(time)
+#
+#	def getTimeout(self):
+#		return self.last_timeout
+#
+#	def updateTimeout(self):
+#		self.last_timeout = int(time.time())
 
 class PicvizApp(QtGui.QWidget):
     def __init__(self, parent=None):
@@ -51,29 +70,31 @@ class AxisName(QtGui.QWidget):
 			self.combo.addItem("axis%d" % id)
 
 	def indexChanged(self, id):
-		print "Change axis id: %d" % id
+		pass
+		#print "Change axis id: %d" % id
 
 	def setCurrentIndex(self, i):
 		self.combo.setCurrentIndex(i)
 
-def addLines(window, filename):
+def addAxes():
 	pen = QtGui.QPen()
 	pen.setColor(QtCore.Qt.black)
 
-	image = picviz.ParseImage(filename)
-
 	i = 0
 	while i < image['axes_number']:
-		combo = AxisName(window)
-		combo.show()
-		for axis in image['axes']:
-			combo.setItemName(axis['label'],axis['id'])
-		combo.setCurrentIndex(i)
-
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
+def addLines(show_max):
+	pen = QtGui.QPen()
+	pen.setColor(QtCore.Qt.black)
+
+	linecounter = 0
 	for line in image['lines']:
+		if linecounter == show_max:
+			return
+		linecounter = linecounter + 1
+
 		plotnb = 0
 		for plot in line:
 			if plotnb != image['axes_number'] - 1:
@@ -82,6 +103,20 @@ def addLines(window, filename):
 				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
 
+def showLines(show_max):
+	itemnb = 0
+	counter = 0
+	for item in scene.items():
+		if ((itemnb - 1)/image['axes_number']  == show_max):
+			return
+		itemnb = itemnb + 1
+		item.show()
+
+def update_lines_view(value):
+	for item in scene.items():
+		item.hide()
+
+	showLines(value)
 
 if __name__ == "__main__":
 
@@ -91,20 +126,42 @@ if __name__ == "__main__":
 	else:
 		pcvfile = sys.argv[1]
 
-	app = QtGui.QApplication(sys.argv)
-	window = QtGui.QMainWindow()
+
+	image = picviz.ParseImage(pcvfile)
 
 	ui.setupUi(window)
         window.setWindowTitle("Picviz %s Frontend [%s]" % (picviz.Version(), pcvfile))
+	window.show()
 
 	scene = QtGui.QGraphicsScene(ui.graphicsView)
-	ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
+	#ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
 	ui.graphicsView.setScene(scene)
 	#scene.setSceneRect(0, 0, 875, 500)
 
-	window.show()
+	i = 0
+	while i < image['axes_number']:
+		combo = AxisName(window)
+		combo.show()
+		for axis in image['axes']:
+			combo.setItemName(axis['label'],axis['id'])
+		combo.setCurrentIndex(i)
 
-	addLines(window, pcvfile)
+		i = i + 1
+
+	ui.horizontalSlider.setPageStep(1)
+	ui.horizontalSlider.setMinimum(0)
+	linenb = 0
+	for line in image['lines']:
+		linenb = linenb + 1
+	ui.horizontalSlider.setMaximum(linenb)
+	ui.horizontalSlider.setValue(linenb)
+	addAxes()
+	addLines(linenb)
+
+	window.connect(ui.horizontalSlider, QtCore.SIGNAL('valueChanged(int)'),
+			update_lines_view)
+
+	#addLines(window, image)
 
 	sys.exit(app.exec_())
 
