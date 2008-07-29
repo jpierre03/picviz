@@ -37,12 +37,12 @@ def ComboIndexChange(widget):
 	print "foo"
 
 class AxisName(QtGui.QWidget):
-	def __init__(self, axisid, parent = None):
+	def __init__(self, parent = None):
 		QtGui.QWidget.__init__(self, parent)
 		self.combo = QtGui.QComboBox()
 		ui.horizontalLayout.addWidget(self.combo)
-		#self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
-		#		self.indexChanged())
+		self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
+				self.indexChanged)
 
 	def setItemName(self, label, id):
 		if label:
@@ -50,13 +50,13 @@ class AxisName(QtGui.QWidget):
 		else:
 			self.combo.addItem("axis%d" % id)
 
-	def indexChanged(self):
-		print "foo"
+	def indexChanged(self, id):
+		print "Change axis id: %d" % id
 
 	def setCurrentIndex(self, i):
 		self.combo.setCurrentIndex(i)
 
-def addLines(filename):
+def addLines(window, filename):
 	pen = QtGui.QPen()
 	pen.setColor(QtCore.Qt.black)
 
@@ -64,7 +64,7 @@ def addLines(filename):
 
 	i = 0
 	while i < image['axes_number']:
-		combo = AxisName(i)
+		combo = AxisName(window)
 		combo.show()
 		for axis in image['axes']:
 			combo.setItemName(axis['label'],axis['id'])
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
 	window.show()
 
-	addLines(pcvfile)
+	addLines(window, pcvfile)
 
 	sys.exit(app.exec_())
 
