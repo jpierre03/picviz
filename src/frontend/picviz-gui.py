@@ -42,8 +42,8 @@ class AxisName(QtGui.QWidget):
 		self.combo = QtGui.QComboBox()
 		ui.horizontalLayout.addWidget(self.combo)
 		self.axisid = axisid
-		self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
-				self.indexChanged())
+		#self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
+		#		self.indexChanged())
 
 	def setItemName(self, label):
 		if label:
@@ -51,7 +51,7 @@ class AxisName(QtGui.QWidget):
 		else:
 			self.combo.addItem("axis%d" % self.axisid)
 
-	def indexChanged(self, i):
+	def indexChanged(self):
 		print "foo"
 
 	def setCurrentIndex(self, i):
