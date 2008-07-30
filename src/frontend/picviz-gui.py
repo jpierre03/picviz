@@ -19,10 +19,9 @@ import picviz
 
 # UI
 from ui_picviz import Ui_MainWindow
-from PicvizGui import selection
+from PicvizGui import axisgui, defaults, selection
 
 
-axiswidth = 130
 
 ui = Ui_MainWindow()
 app = QtGui.QApplication(sys.argv)
@@ -56,40 +55,6 @@ class PicvizApp(QtGui.QWidget):
 def ComboIndexChange(widget):
 	print "foo"
 
-class AxisName(QtGui.QWidget):
-	def __init__(self, parent = None):
-		QtGui.QWidget.__init__(self, parent)
-		self.combo = QtGui.QComboBox()
-		ui.horizontalLayout.addWidget(self.combo)
-		self.connect(self.combo, QtCore.SIGNAL('currentIndexChanged(int)'),
-				self.indexChanged)
-
-	def setItemName(self, label, id):
-		if label:
-			self.combo.addItem(label)
-		else:
-			self.combo.addItem("axis%d" % id)
-
-	def indexChanged(self, id):
-		pass
-		#print "Change axis id: %d" % id
-
-	def setCurrentIndex(self, i):
-		self.combo.setCurrentIndex(i)
-
-def addAxes():
-	pen = QtGui.QPen()
-	pen.setColor(QtCore.Qt.black)
-
-	item = selection.SelectionItem()
-	item.setPos(0,0)
-        scene.addItem(item)
-
-	i = 0
-	while i < image['axes_number']:
-		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
-		i = i + 1
-
 def QTColorGet(color):
 	if (color == "#000000"):
 		return QtCore.Qt.black
@@ -116,7 +81,7 @@ def addLines(show_max):
 			if plotnb != image['axes_number'] - 1:
 				qtcolor = QTColorGet(line[plotnb]['color'])
 				pen.setColor(qtcolor)
-				ptr = scene.addLine(plotnb * axiswidth, image['height'] - line[plotnb]['y'], (plotnb + 1) * axiswidth, image['height'] - line[plotnb+1]['y'], pen)
+				ptr = scene.addLine(plotnb * defaults.axiswidth, image['height'] - line[plotnb]['y'], (plotnb + 1) * defaults.axiswidth, image['height'] - line[plotnb+1]['y'], pen)
 				ptr.setToolTip("%s -> %s" % (line[plotnb]['strval'], line[plotnb+1]['strval']))
 				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
@@ -158,7 +123,7 @@ if __name__ == "__main__":
 
 	i = 0
 	while i < image['axes_number']:
-		combo = AxisName(window)
+		combo = axisgui.AxisName(ui, window)
 		combo.show()
 		for axis in image['axes']:
 			combo.setItemName(axis['label'],axis['id'])
@@ -173,12 +138,11 @@ if __name__ == "__main__":
 		linenb = linenb + 1
 	ui.horizontalSlider.setMaximum(linenb)
 	ui.horizontalSlider.setValue(linenb)
-	addAxes()
+	axisgui.addAxes(image, scene)
 	addLines(linenb)
 
 	window.connect(ui.horizontalSlider, QtCore.SIGNAL('valueChanged(int)'),
 			update_lines_view)
-
 	#addLines(window, image)
 
 	sys.exit(app.exec_())

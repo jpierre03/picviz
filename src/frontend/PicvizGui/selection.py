@@ -16,3 +16,24 @@ class SelectionItem(QtGui.QGraphicsItem):
 		painter.setBrush(QtGui.QBrush(self.color))
 		painter.drawLine(-20, 0, 20, 0)
 
+	def mousePressEvent(self, event):
+        	if event.button() != QtCore.Qt.LeftButton:
+            		event.ignore()
+            		return
+
+		print "Mouse pressed"
+
+        	drag = QtGui.QDrag(event.widget())
+        	mime = QtCore.QMimeData()
+        	drag.setMimeData(mime)
+
+		drag.start()
+
+	def dragEnterEvent(self, event):
+		print "Enter event"
+
+	def dragLeaveEvent(self, event):
+		print "Leave event"
+
+	def dropEvent(self, event):
+		print "Drop event"
