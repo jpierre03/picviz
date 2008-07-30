@@ -19,6 +19,7 @@ import picviz
 
 # UI
 from ui_picviz import Ui_MainWindow
+from PicvizGui import selection
 
 
 axiswidth = 130
@@ -79,6 +80,10 @@ class AxisName(QtGui.QWidget):
 def addAxes():
 	pen = QtGui.QPen()
 	pen.setColor(QtCore.Qt.black)
+
+	item = selection.SelectionItem()
+	item.setPos(0,0)
+        scene.addItem(item)
 
 	i = 0
 	while i < image['axes_number']:
