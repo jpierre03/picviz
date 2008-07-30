@@ -85,9 +85,20 @@ def addAxes():
 		scene.addLine(i * axiswidth, 0, i * axiswidth, image['height'], pen)
 		i = i + 1
 
+def QTColorGet(color):
+	if (color == "#000000"):
+		return QtCore.Qt.black
+	if (color == "#FF0000"):
+		return QtCore.Qt.red
+	if (color == "#0000FF"):
+		return QtCore.Qt.blue
+	if (color == "#FF9900"):
+		return QtCore.Qt.yellow
+
+	return QtCore.Qt.black
+
 def addLines(show_max):
 	pen = QtGui.QPen()
-	pen.setColor(QtCore.Qt.black)
 
 	linecounter = 0
 	for line in image['lines']:
@@ -98,7 +109,9 @@ def addLines(show_max):
 		plotnb = 0
 		for plot in line:
 			if plotnb != image['axes_number'] - 1:
-				ptr = scene.addLine(plotnb * axiswidth, image['height'] - line[plotnb]['y'], (plotnb + 1) * axiswidth, image['height'] - line[plotnb+1]['y'])
+				qtcolor = QTColorGet(line[plotnb]['color'])
+				pen.setColor(qtcolor)
+				ptr = scene.addLine(plotnb * axiswidth, image['height'] - line[plotnb]['y'], (plotnb + 1) * axiswidth, image['height'] - line[plotnb+1]['y'], pen)
 				ptr.setToolTip("%s -> %s" % (line[plotnb]['strval'], line[plotnb+1]['strval']))
 				ptr.setCursor(QtCore.Qt.OpenHandCursor)
 			plotnb = plotnb + 1
