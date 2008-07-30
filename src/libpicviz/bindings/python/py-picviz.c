@@ -73,7 +73,7 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
         PyObject *main_dict = PyDict_New();
         PyObject *axeslist = PyList_New(0);
         PyObject *lineslist = PyList_New(0);
-        PyObject *linedata = PyDict_New();
+        //PyObject *linedata = PyDict_New();
 
 	picviz_init();
 	PyArg_ParseTuple(args, "s", &filename);
@@ -112,17 +112,22 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
         /* Set Lines plots and properties */
 	llist_for_each_entry(line, &image->lines->list, list) {
                 PyObject *axisplotlist = PyList_New(0);
-                ret = pypicviz_dict_keyval_append_long(linedata, "id", line->id);
-                if (ret < 0) {
-                        Py_RETURN_NONE;
-                }
-                ret = pypicviz_dict_keyval_append_str(linedata, "color", line->props->color);
-                if (ret < 0) {
-                        Py_RETURN_NONE;
-                }
+                //ret = pypicviz_dict_keyval_append_long(linedata, "id", line->id);
+                //if (ret < 0) {
+                //        Py_RETURN_NONE;
+                //}
+                //ret = pypicviz_dict_keyval_append_str(linedata, "color", line->props->color);
+                //if (ret < 0) {
+                //        Py_RETURN_NONE;
+                //}
                 /* Set Line plots */
 		llist_for_each_entry(axisplot, &line->axisplot->list, list) {
                         PyObject *plotsdata = PyDict_New();
+			/* We add the color information along with plots, to ease the line creation with QT */
+			ret = pypicviz_dict_keyval_append_str(plotsdata, "color", line->props->color);
+			if (ret < 0) {
+				Py_RETURN_NONE;
+			}
                         ret = pypicviz_dict_keyval_append_str(plotsdata, "strval", axisplot->strval);
                         if (ret < 0) {
                                 Py_RETURN_NONE;
