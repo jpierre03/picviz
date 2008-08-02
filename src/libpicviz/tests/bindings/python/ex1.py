@@ -12,8 +12,8 @@ data = picviz.ParseImage(filename)
 
 print "The image height is %d " % data['height']
 print "There are %d axes" % data['axes_number']
-for line in data['lines']:
-        print str(line[1]['y'])
+#for line in data['lines']:
+#        print str(line[1]['y'])
 
 print "Whole data structure:"
 print str(data)

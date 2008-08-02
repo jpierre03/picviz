@@ -56,37 +56,37 @@
  */
 u_int32_t ipstr2i(char *quad)
 {
-	char buf[128];
-	int x, y, z;
+        char buf[128];
+        int x, y, z;
         u_int32_t i;
 
-	if ( ! strcmp(quad, "")) return 0;
+        if ( ! strcmp(quad, "")) return 0;
 
-	//if (!validate_v4addr (quad))
-	//	return -1;
+        //if (!validate_v4addr (quad))
+        //      return -1;
 
-	bzero ((char *) buf, 128);
-	x = 0;
-	while (quad[x] != '.') {
-		buf[x] = quad[x];
-		x++;
-	}
-	i = 0;
-	x++;
-	for (y = 0; y < 4; y++) {
-		z = atoi (buf);
-		if (z > 255 || z < 0)
-			return -1;
-		i = i | (z << (8 * (3 - y)));
-		bzero ((char *) buf, 128);
-		z = 0;
-		while (quad[x] != '.' && quad[x] != '\0' && x < strlen (quad)) {
-			buf[z] = quad[x];
-			x++;
-			z++;
-		}
-		x++;
-	}
+        bzero ((char *) buf, 128);
+        x = 0;
+        while (quad[x] != '.') {
+                buf[x] = quad[x];
+                x++;
+        }
+        i = 0;
+        x++;
+        for (y = 0; y < 4; y++) {
+                z = atoi (buf);
+                if (z > 255 || z < 0)
+                        return -1;
+                i = i | (z << (8 * (3 - y)));
+                bzero ((char *) buf, 128);
+                z = 0;
+                while (quad[x] != '.' && quad[x] != '\0' && x < strlen (quad)) {
+                        buf[z] = quad[x];
+                        x++;
+                        z++;
+                }
+                x++;
+        }
 
         return i;
 }
@@ -100,7 +100,7 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
         size_t strsize;
         char *hour;
         char *min;
-	char *sec;
+        char *sec;
 
 
         switch (type) {
@@ -125,7 +125,7 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
                         if (strsize == 8) { /* 10:42:22 */
                                 hour = malloc(3);
                                 min  = malloc(3);
-				sec  = malloc(3);
+                                sec  = malloc(3);
 
                                 strncpy(hour, string, 2);
                                 hour[2] = '\0';
@@ -138,7 +138,7 @@ PcvHeight picviz_line_value_get_from_string_dummy(datatype_t type, char *string)
 
                                 free(hour);
                                 free(min);
-				free(sec);
+                                free(sec);
                         }
                         if (strsize == 5) { /* 10:42 */
                                 hour = malloc(3);
@@ -177,7 +177,7 @@ PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight ma
 
         value = (float)(image->height - image->header_height) / max_val;
 
-	value *= y;
+        value *= y;
 
         return (PcvHeight)value;
 
@@ -188,7 +188,7 @@ PcvHeight picviz_values_mapping_get_from_y(struct pcimage_t *image, PcvHeight ma
 
 void run_test(char *val)
 {
-	printf("Value=%s -> Int=%u\n", val, ipstr2i(val));
+        printf("Value=%s -> Int=%u\n", val, ipstr2i(val));
 }
 
 int main(void)
@@ -198,10 +198,10 @@ int main(void)
 
         f = picviz_line_value_get_from_string_dummy(DATATYPE_STRING, STRING_TYPE_MAX);
 
-	run_test("192.168.0.42");
-	run_test("127.0.0.1");
-	run_test("0.0.0.0");
-	run_test("255.255.255.255");
+        run_test("192.168.0.42");
+        run_test("127.0.0.1");
+        run_test("0.0.0.0");
+        run_test("255.255.255.255");
 
         return 0;
 }

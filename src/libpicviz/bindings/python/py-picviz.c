@@ -74,6 +74,7 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
         PyObject *axeslist = PyList_New(0);
         PyObject *lineslist = PyList_New(0);
         //PyObject *linedata = PyDict_New();
+        //PyObject *lineprops = PyDict_New();
 
 	picviz_init();
 	PyArg_ParseTuple(args, "s", &filename);
@@ -143,8 +144,9 @@ PyObject *pypicviz_lines_list_build_from_file(PyObject *self, PyObject *args)
 			PyList_Append(axisplotlist, plotsdata);
 
 		}
-		PyList_Append(lineslist, axisplotlist);
+		PyList_Append(linedata, axisplotlist);
 	}
+        PyList_Append(lineslist, linedata);
         ret = PyDict_SetItemString(main_dict, "lines", lineslist);
 
 	picviz_image_destroy(image);
